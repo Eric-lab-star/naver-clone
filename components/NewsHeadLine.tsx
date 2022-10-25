@@ -1,8 +1,8 @@
-import ChevronLeft from "./ChevronLeft";
+import ChevronLeft from "./ChevronRight";
 
 export default function NewsHeadLine() {
   return (
-    <div className="bg-slate-100 px-3 flex items-center justify-between border-[1px] border-slate-300">
+    <div className="bg-slate-100 px-3 flex items-center justify-between border border-slate-300">
       <div className=" text-sm h-[50px] flex items-center">
         <div className="flex items-center">
           <div className="font-bold ">연합뉴스</div>
