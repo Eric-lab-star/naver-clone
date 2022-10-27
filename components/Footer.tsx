@@ -2,52 +2,32 @@ import ChevronLeft from "./ChevronRight";
 
 export default function Footer() {
   return (
-    <div className="px-8 min-w-max flex justify-center items-center  ">
+    <div className="bg-[#fafbfc] border-t px-8 min-w-max flex justify-center items-center  ">
       <div className="w-[1133px]  h-[423px] divide-y-[1.7px] flex flex-col">
         <div className="h-[135px] py-5 flex w-full">
-          <div className="w-1/3 h-full flex">
-            <div className="w-[160px] bg-amber-200 h-full"></div>
-            <div className="flex-1 text-xs h-full pl-4 flex flex-col justify-between py-1">
-              <div className="text-green-500  font-bold">
-                탄소녹색중립 성장 위원회
-              </div>
-              <div className=" font-semibold text-sm">경제의 새로운 발견!</div>
-              <div>
-                <p>환경도 경제도 살리는</p>
-                <p>우리 위한 우리 다운 선택</p>
-              </div>
-            </div>
-          </div>
-          <div className="w-1/3 h-full flex">
-            <div className="w-[160px] bg-amber-200 h-full"></div>
-            <div className="flex-1 text-xs h-full pl-4 flex flex-col justify-between py-1">
-              <div className="text-green-500  font-bold">네이버 커넥트재단</div>
-              <div className=" font-semibold text-sm">연구 과제 공모</div>
-              <div>
-                <p>공모에 선정된 연구자에게</p>
-                <p>교육 데이터와 연구비 지원</p>
+          {[1, 2, 3].map((v) => (
+            <div key={v} className="w-1/3 h-full flex">
+              <div className="w-[160px] bg-amber-200 h-full"></div>
+              <div className="flex-1 text-xs h-full pl-4 flex flex-col justify-between py-1">
+                <div className="text-green-500  font-bold">
+                  탄소녹색중립 성장 위원회
+                </div>
+                <div className=" font-semibold text-sm">
+                  경제의 새로운 발견!
+                </div>
+                <div>
+                  <p>환경도 경제도 살리는</p>
+                  <p>우리 위한 우리 다운 선택</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="w-1/3 h-full flex">
-            <div className="w-[160px] bg-amber-200 h-full"></div>
-            <div className="flex-1 text-xs h-full pl-4 flex flex-col justify-between py-1">
-              <div className="text-green-500  font-bold">주니어 네이버</div>
-              <div className=" font-semibold text-sm">
-                우리아이 취향 저격 이벤트
-              </div>
-              <div>
-                <p>기대평 작성하고</p>
-                <p>공룡 뮤지컬 초대권 받자!</p>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
         <div className="py-3 w-full flex justify-between items-center text-xs font-bold">
           <div>공지 사항</div>
           <div className="flex justify-center items-center">
             <div className="mr-2">서비스 전체보기</div>
-            <ChevronLeft />
+            <ChevronLeft className="text-slate-400" />
           </div>
         </div>
         <div className="h-[135px] flex justify-between items-center w-full text-xs text-slate-500">
@@ -115,30 +95,23 @@ export default function Footer() {
         <div className="h-[135px] 0 w-full">
           <div className="flex  max-h-min pt-3 text-slate-500 text-xs ">
             <div className="divide-x-[1px] flex space-x-2 divide-slate-300">
-              <div className="pl-2 hover:underline hover:cursor-pointer">
-                회사 소개
-              </div>
-              <div className="pl-2 hover:underline hover:cursor-pointer">
-                인재 채용
-              </div>
-              <div className="pl-2 hover:underline hover:cursor-pointer">
-                제휴약관
-              </div>
-              <div className="pl-2 hover:underline hover:cursor-pointer">
-                이용약관
-              </div>
-              <div className="pl-2 hover:underline hover:cursor-pointer">
-                개인정보처리방침
-              </div>
-              <div className="pl-2 hover:underline hover:cursor-pointer">
-                청소년보호정책
-              </div>
-              <div className="pl-2 hover:underline hover:cursor-pointer">
-                네이버 정책
-              </div>
-              <div className="pl-2 hover:underline hover:cursor-pointer">
-                고객센터
-              </div>
+              {[
+                "회사 소개",
+                "인재 채용",
+                "제휴약관",
+                "이용약관",
+                "개인정보처리방침",
+                "청소년보호정책",
+                "네이버 정책",
+                "고객센터",
+              ].map((v) => (
+                <div
+                  key={v}
+                  className="pl-2 hover:underline hover:cursor-pointer"
+                >
+                  {v}
+                </div>
+              ))}
             </div>
             <div>
               <div className="pl-2 font-bold text-black">

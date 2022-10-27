@@ -101,13 +101,13 @@ export default function News() {
                   </div>
                 </div>
                 <div className="text-slate-400 text-xs mt-5">
-                  SBS 언론사에서 직접 편집한 뉴스입니다.
+                  SBS 언론사에서 test 직접 편집한 뉴스입니다.
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <SliderBtn top={114} />
+        <SliderBtn className="top-[114px]" />
       </div>
     </div>
   );
