@@ -18,12 +18,7 @@ export default function HStack({
   category,
 }: Idata) {
   return (
-    <div
-      className={cls(
-        "flex space-x-4",
-        id === 9 || id === 5 ? "border-b pb-4" : ""
-      )}
-    >
+    <div className={cls("flex space-x-4")}>
       <div className="w-[170px] h-[114px] bg-slate-200 flex-none"></div>
       <div className="text-sm">
         <div className="text-amber-700 text-[12.5px] ">{category}</div>

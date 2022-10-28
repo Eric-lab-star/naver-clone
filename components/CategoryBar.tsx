@@ -1,7 +1,5 @@
 import { MouseEvent } from "react";
 import { CategoryDB, ICategoryDB } from "../FakeDB/CategoryDB";
-import cls from "../utils/cls";
-
 export default function CategoryBar({
   category,
   onClick,
@@ -16,8 +14,8 @@ export default function CategoryBar({
           onClick={(event) => onClick(event)}
           key={data.name}
           style={{
-            backgroundColor: category === data.name ? data.color : "",
-            color: category === data.name ? "white" : "",
+            backgroundColor: category === data.name ? data.color : undefined,
+            color: category === data.name ? "white" : undefined,
           }}
           onMouseOver={(event) => {
             if (category === data.name) return;

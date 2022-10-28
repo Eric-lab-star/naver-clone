@@ -1,4 +1,5 @@
 import Link from "next/link";
+import React from "react";
 import cls from "../utils/cls";
 import MailSvg from "./MailSvg";
 
@@ -21,15 +22,18 @@ export default function Navbar() {
     "도서",
     "웹툰",
   ];
+
   return (
     <div className="border-y min-w-max  shadow-[0px_10px_10px_-13px_rgba(0,0,0,0.5)] px-8 ">
       <div className="w-[1133px] flex items-center justify-between m-auto ">
         <ul className="flex flex-nowrap space-x-3 py-[13px]">
           <Link href={"/메일"}>
-            <MailSvg />
+            <a>
+              <MailSvg />
+            </a>
           </Link>
           {navList.map((value, index) => (
-            <Link key={value} href={`/${value}`}>
+            <Link key={value} href={`/${value}`} legacyBehavior>
               <a
                 className={cls(
                   "font-bold",
