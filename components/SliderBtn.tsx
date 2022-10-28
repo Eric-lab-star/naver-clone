@@ -11,7 +11,7 @@ export default function SliderBtn({ className }: { className: string }) {
           className
         )}
       >
-        <ChevronLeft className="text-slate-700" />
+        <ChevronLeft className="text-slate-700 w-4" />
       </div>
       <div
         className={cls(
@@ -19,7 +19,7 @@ export default function SliderBtn({ className }: { className: string }) {
           className
         )}
       >
-        <ChevronRight className="text-slate-700" />
+        <ChevronRight className="text-slate-700 w-4" />
       </div>
     </>
   );

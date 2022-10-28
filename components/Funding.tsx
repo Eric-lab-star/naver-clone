@@ -3,10 +3,10 @@ import SliderBtn from "./SliderBtn";
 
 export default function Funding() {
   return (
-    <div className="">
+    <div className="border-y border-slate-300 pb-5">
       <div className="my-5 flex items-center text-sm font-bold ">
-        <div>오늘 가장 따뜻한 클릭</div>
-        <ChevronRight className="text-slate-800" />
+        <div className="mr-1">오늘 가장 따뜻한 클릭</div>
+        <ChevronRight className="text-slate-800 w-4" />
       </div>
       <div className="grid grid-cols-3  gap-4 relative ">
         {[1, 2, 3].map((v) => (

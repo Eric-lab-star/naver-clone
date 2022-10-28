@@ -8,7 +8,7 @@ export default function ListSVG({ className }: { className: string }) {
       viewBox="0 0 24 24"
       strokeWidth={2}
       stroke="currentColor"
-      className={cls(className, "w-6")}
+      className={cls(className)}
     >
       <path
         strokeLinecap="round"

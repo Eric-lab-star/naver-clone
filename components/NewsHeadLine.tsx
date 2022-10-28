@@ -6,7 +6,7 @@ export default function NewsHeadLine() {
       <div className=" text-sm h-[50px] flex items-center">
         <div className="flex items-center">
           <div className="font-bold ">연합뉴스</div>
-          <ChevronLeft />
+          <ChevronLeft className="w-[13.5px] text-slate-600" />
         </div>
         <div className="w-[305px]  truncate">
           정기석, &quot;실내 마스크, 지금은 벗을 상황 아니야 3개월은

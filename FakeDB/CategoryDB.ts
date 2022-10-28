@@ -26,7 +26,7 @@ export const CategoryDB: ICategoryDB[] = [
   },
   {
     name: "책방",
-    color: "#059669",
+    color: "#10b981",
   },
   {
     name: "리빙",

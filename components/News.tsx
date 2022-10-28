@@ -4,6 +4,7 @@ import CalendarDays from "./CalendarDays";
 import ChevronLeft from "./ChevronLeft";
 import ChevronRight from "./ChevronRight";
 import CogSVG from "./Cog";
+import Grid from "./Grid";
 import ListSVG from "./ListSVG";
 import SliderBtn from "./SliderBtn";
 import SquareSVG from "./SquareSVG";
@@ -19,14 +20,14 @@ export default function News() {
             <CalendarDays />
             <div className="ml-1">뉴스스탠드</div>
           </div>
-          <ChevronLeft />
+          <ChevronRight className="w-4 text-slate-500" />
           <div className="hover:cursor-pointer">구독한 언론사</div>
           <div className="font-normal hover:cursor-pointer">| 전체 언론사</div>
         </div>
         <div className="flex items-center space-x-2">
-          <ListSVG className="text-blue-600 font-bold" />
-          <SquareSVG className=" text-slate-500" />
-          <CogSVG className=" text-slate-500" />
+          <ListSVG className="text-blue-600 font-bold w-5" />
+          <Grid className="w-3 fill-slate-500 hover:fill-slate-700" />
+          <CogSVG className=" text-slate-500 w-5" />
         </div>
       </div>
       {/** 뉴스 상자*/}
