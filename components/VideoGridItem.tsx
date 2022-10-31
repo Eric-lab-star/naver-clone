@@ -1,6 +1,6 @@
 import { IVideo } from "../FakeDB/VideoDB";
 
-export default function VideoGrid({ data }: { data: IVideo }) {
+export default function VideoGridItem({ data }: { data: IVideo }) {
   return (
     <div className="w-[231px] hover:cursor-pointer">
       <div className=" h-[130px] bg-slate-300">{data.video}</div>

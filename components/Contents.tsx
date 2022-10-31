@@ -2,6 +2,7 @@ import Advertise from "./Advertise";
 import NewsHeadLine from "./NewsHeadLine";
 import News from "./News";
 import Article from "./Article";
+
 export default function Body() {
   return (
     <div className="min-w-max flex items-center justify-center mt-5 px-8">

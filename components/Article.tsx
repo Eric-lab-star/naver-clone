@@ -5,6 +5,7 @@ import Economy from "./Economy";
 import Books from "./Books";
 import Living from "./Living";
 import SectionHeader from "./SectionHeader";
+import Cars from "./Cars";
 export default function Article() {
   const [category, setCategory] = useState<string>("엔터");
   const onClick = (event: MouseEvent<HTMLDivElement>) => {
@@ -25,6 +26,7 @@ export default function Article() {
       {category === "리빙" ? <Living category={category} /> : null}
       {category === "책방" ? <Books category={category} /> : null}
       {category === "경제" ? <Economy category={category} /> : null}
+      {category === "자동차" ? <Cars category={category} /> : null}
     </div>
   );
 }
