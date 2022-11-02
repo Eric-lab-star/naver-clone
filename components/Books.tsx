@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BookDB } from "../FakeDB/BookDB";
+import BookCover from "./BookCover";
 import ChevronLeft from "./ChevronLeft";
 import ChevronRight from "./ChevronRight";
 import HStack from "./HStack";
@@ -49,29 +50,13 @@ export default function Books({ category }: { category: string }) {
         <div className="relative ">
           <div className="grid grid-cols-5 gap-8 " key={page}>
             {BookDB.slice(page * 5, (page + 1) * 5).map((book) => (
-              <div key={book.id} className="w-[120px]">
-                <div className=" h-[180px] bg-slate-300"></div>
-                <div className="">
-                  <div className="font-bold my-3 text-[12.5px]">
-                    {book.title}
-                  </div>
-                  <div className=" text-xs text-slate-500">
-                    <div className="space-x-1 line-clamp-1">
-                      <span>저자</span>
-                      <span>{book.author}</span>
-                    </div>
-                    <div className="space-x-1">
-                      <span>출판</span>
-                      <span>{book?.company}</span>
-                    </div>
-                    <div className="flex space-x-1 items-center">
-                      <span>평점</span>
-                      <StarSVG />
-                      <span className="text-red-500">4.9</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <BookCover
+                title={book.title}
+                author={book.author}
+                company={book.company}
+                key={book.id}
+                rating={5}
+              />
             ))}
           </div>
           {page !== 0 ? (

@@ -26,6 +26,7 @@ export default function Economy({ category }: { category: string }) {
         <div key={i} className="flex space-y-4 flex-col">
           {BookDB.slice(v * 8, v * 8 + 4).map((data) => (
             <HStack
+              className="hover:cursor-pointer"
               categoryColor="text-green-500"
               {...data}
               category={category}
@@ -39,6 +40,7 @@ export default function Economy({ category }: { category: string }) {
           </div>
           {BookDB.slice(v * 8 + 4, v * 8 + 8).map((data) => (
             <HStack
+              className="hover:cursor-pointer"
               categoryColor="text-green-500"
               {...data}
               category={category}

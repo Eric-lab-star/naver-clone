@@ -23,12 +23,14 @@ export default function HStack({
 }: Idata) {
   return (
     <div className={className}>
-      <div className={cls("flex space-x-4")}>
+      <div className="flex space-x-4">
         <div className="w-[170px] h-[114px] bg-slate-200 flex-none"></div>
         <div className="text-sm">
-          <div className={`${categoryColor} text-[12.5px]`}>{category}</div>
-          <div className="font-bold text-sm">{title}</div>
-          <div className="w-[521px] text-[12.5px] h-10 line-clamp-2">
+          <div className={`${categoryColor} text-[12.5px] font-semibold`}>
+            {category}
+          </div>
+          <div className="hover:underline font-bold text-sm">{title}</div>
+          <div className=" w-[521px] text-[12.5px] h-10 line-clamp-2">
             {desc}
           </div>
           <div className="text-[12.5px]">
