@@ -8,7 +8,7 @@ export default function CategoryBar({
   onClick: (event: MouseEvent<HTMLDivElement>) => void;
 }) {
   return (
-    <div className=" h-[47px]  border grid grid-cols-8 divide-x-[1px] divide-slate-300">
+    <div className=" h-[47px]  border grid grid-cols-6 divide-x-[1px] divide-slate-300">
       {CategoryDB.map((data) => (
         <div
           onClick={(event) => onClick(event)}

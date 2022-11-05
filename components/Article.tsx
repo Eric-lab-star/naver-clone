@@ -7,8 +7,9 @@ import Living from "./Living";
 import SectionHeader from "./SectionHeader";
 import Cars from "./Cars";
 import WebToon from "./WebToon";
+import Fashion from "./Fashion";
 export default function Article() {
-  const [category, setCategory] = useState<string>("엔터");
+  const [category, setCategory] = useState<string>("웹툰");
   const onClick = (event: MouseEvent<HTMLDivElement>) => {
     const target = event.currentTarget;
     setCategory(() => target.innerHTML);
@@ -29,6 +30,7 @@ export default function Article() {
       {category === "경제" ? <Economy category={category} /> : null}
       {category === "자동차" ? <Cars category={category} /> : null}
       {category === "웹툰" ? <WebToon category={category} /> : null}
+      {category === "패션뷰티" ? <Fashion category={category} /> : null}
     </div>
   );
 }

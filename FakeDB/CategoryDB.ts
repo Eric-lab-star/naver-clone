@@ -5,14 +5,6 @@ export interface ICategoryDB {
 
 export const CategoryDB: ICategoryDB[] = [
   {
-    name: "엔터",
-    color: "#ef4444",
-  },
-  {
-    name: "스포츠",
-    color: "#2563eb",
-  },
-  {
     name: "웹툰",
     color: "#16a34a",
   },

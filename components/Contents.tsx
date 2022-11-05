@@ -2,6 +2,7 @@ import Advertise from "./Advertise";
 import NewsHeadLine from "./NewsHeadLine";
 import News from "./News";
 import Article from "./Article";
+import LoginForm from "./LoginForm";
 
 export default function Body() {
   return (
@@ -13,7 +14,9 @@ export default function Body() {
           <News />
           <Article />
         </div>
-        <div className="min-h-screen w-[348px] bg-blue-300 " />
+        <div className="min-h-screen w-[348px] ">
+          <LoginForm />
+        </div>
       </div>
     </div>
   );

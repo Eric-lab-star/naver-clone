@@ -231,6 +231,78 @@ export default function WebToon({ category }: { category: string }) {
           <ChevronRight className="text-slate-700 w-4" />
         </div>
       </div>
+      <div className="border-y ">
+        <div className="text-black font-bold text-[14px] py-6">
+          이번주 가장 많이 본 완결작 TOP 10
+        </div>
+        <div className="relative" key={sliderPage}>
+          <div className="grid grid-cols-4 relative  pb-6  place-items-center">
+            {WebToonDB.slice(sliderPage * 4, (sliderPage + 1) * 4).map(
+              (webtoon, webtoonIndex) => (
+                <div key={webtoonIndex} className="w-[140px] ">
+                  <div className=" h-[100px] bg-slate-200"></div>
+                  <div className="mt-3">
+                    <div className="text-[13px] font-semibold text-black">
+                      {webtoon.title}
+                    </div>
+                    <div className="text-xs text-slate-500">
+                      {webtoon.author}
+                    </div>
+                  </div>
+                </div>
+              )
+            )}
+          </div>
+          <div
+            onClick={() => onSliderBtnClick(-1)}
+            className="top-[30px] w-[30px] hover:cursor-pointer absolute -left-5 aspect-square rounded-full shadow-slate-300 shadow-md bg-white flex justify-center items-center"
+          >
+            <ChevronLeft className="text-slate-700 w-4" />
+          </div>
+          <div
+            onClick={() => onSliderBtnClick(1)}
+            className="top-[30px] w-[30px] hover:cursor-pointer absolute  -right-5 aspect-square rounded-full shadow-slate-300 shadow-md bg-white flex justify-center items-center"
+          >
+            <ChevronRight className="text-slate-700 w-4" />
+          </div>
+        </div>
+      </div>
+      <div className="pb-32 ">
+        <div className="text-black font-bold text-[14px] py-6">
+          추천 베스트리그 웹소설
+        </div>
+        <div className="relative" key={sliderPage}>
+          <div className="grid grid-cols-4 relative  pb-6  place-items-center">
+            {WebToonDB.slice(sliderPage * 4, (sliderPage + 1) * 4).map(
+              (webtoon, webtoonIndex) => (
+                <div key={webtoonIndex} className="w-[140px] ">
+                  <div className=" h-[100px] bg-slate-200"></div>
+                  <div className="mt-3">
+                    <div className="text-[13px] font-semibold text-black">
+                      {webtoon.title}
+                    </div>
+                    <div className="text-xs text-slate-500">
+                      {webtoon.author}
+                    </div>
+                  </div>
+                </div>
+              )
+            )}
+          </div>
+          <div
+            onClick={() => onSliderBtnClick(-1)}
+            className="top-[30px] w-[30px] hover:cursor-pointer absolute -left-5 aspect-square rounded-full shadow-slate-300 shadow-md bg-white flex justify-center items-center"
+          >
+            <ChevronLeft className="text-slate-700 w-4" />
+          </div>
+          <div
+            onClick={() => onSliderBtnClick(1)}
+            className="top-[30px] w-[30px] hover:cursor-pointer absolute  -right-5 aspect-square rounded-full shadow-slate-300 shadow-md bg-white flex justify-center items-center"
+          >
+            <ChevronRight className="text-slate-700 w-4" />
+          </div>
+        </div>
+      </div>
     </>
   );
 }
