@@ -1,9 +1,14 @@
+import Image from "next/image";
 import Link from "next/link";
-import React from "react";
-import cls from "../utils/cls";
-import MailSvg from "./MailSvg";
+import React, { useEffect, useRef, useState } from "react";
+import useSWR from "swr";
 
+import { IWeatherData } from "../pages/api/weather";
+import cls from "../utils/cls";
+import useIcon from "../utils/useIcon";
+import MailSvg from "./MailSvg";
 export default function Navbar() {
+  const [counter, setCounter] = useState(0);
   const navList = [
     "메일",
     "카페",
@@ -22,12 +27,32 @@ export default function Navbar() {
     "도서",
     "웹툰",
   ];
+  const [{ lat, long }, setPosition] = useState<{
+    lat: number;
+    long: number;
+  }>({ lat: 36, long: 127 });
 
+  useEffect(() => {
+    const geo = window.navigator.geolocation;
+    geo.getCurrentPosition((pos) =>
+      setPosition({ lat: pos.coords.latitude, long: pos.coords.longitude })
+    );
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCounter((prev) => (prev += 1));
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const { data, error } = useSWR<IWeatherData>("/api/weather");
   return (
-    <div className="border-y min-w-max  shadow-[0px_10px_10px_-13px_rgba(0,0,0,0.5)] px-8 ">
+    <div className="border-y min-w-max  shadow-sm px-8 ">
       <div className="w-[1133px] flex items-center justify-between m-auto ">
         <ul className="flex flex-nowrap space-x-3 py-[13px]">
-          <Link href={"/메일"}>
+          <Link href={"/"}>
             <a>
               <MailSvg />
             </a>
@@ -45,7 +70,35 @@ export default function Navbar() {
             </Link>
           ))}
         </ul>
-        <div>미세 | 좋음 | 초미세 |좋음</div>
+        <div>
+          {counter % 2 === 1 && (
+            <div className="flex text-[15px] text-slate-800 items-center font-semibold space-x-1">
+              <div>
+                <span className="mr-1">습도</span>
+                {data?.main.humidity}
+              </div>
+              <div>
+                <span className="mr-1">풍속</span>
+                {data?.wind.speed}
+              </div>
+            </div>
+          )}
+          {counter % 2 === 0 && (
+            <div className="flex text-[15px] text-slate-800 items-center font-semibold space-x-1">
+              <div className=" w-[40px] h-[40px] relative">
+                {data?.weather[0]?.icon && (
+                  <Image
+                    src={` http://openweathermap.org/img/wn/${data?.weather[0].icon}@2x.png`}
+                    alt="icon"
+                    layout="fill"
+                  />
+                )}
+              </div>
+              <div>{data?.main?.temp}&#8451;</div>
+              <div>{data?.weather[0]?.description}</div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

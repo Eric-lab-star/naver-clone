@@ -5,6 +5,16 @@ const nextConfig = {
   experimental: {
     forceSwcTransforms: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "openweathermap.org",
+        port: "",
+        pathname: "/img/wn/**",
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;
