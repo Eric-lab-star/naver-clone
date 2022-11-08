@@ -8,7 +8,7 @@ export default function ChevronLeft({ className }: { className: string }) {
       viewBox="0 0 24 24"
       strokeWidth={3}
       stroke="currentColor"
-      className={cls("w-4 h-4", className)}
+      className={cls(className)}
     >
       <path
         strokeLinecap="round"
