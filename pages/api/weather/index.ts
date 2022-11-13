@@ -47,7 +47,7 @@ export interface IWeatherData {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<IWeatherData>
+  res: NextApiResponse
 ) {
   const response = await fetch(
     "https://api.openweathermap.org/data/2.5/weather?lat=36&lon=127&appid=d5ad214b1b044e97ed9389e018c98f45&units=metric&lang=kr"

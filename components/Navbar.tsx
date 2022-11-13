@@ -1,11 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
-import useSWR from "swr";
-
-import { IWeatherData } from "../pages/api/weather";
+import React, { useEffect, useState } from "react";
+import useSWR, { useSWRConfig } from "swr";
+import { IWeatherData } from "../pages/api/weather/[...location]";
 import cls from "../utils/cls";
-import useIcon from "../utils/useIcon";
 import MailSvg from "./MailSvg";
 export default function Navbar() {
   const [counter, setCounter] = useState(0);
@@ -27,6 +25,7 @@ export default function Navbar() {
     "도서",
     "웹툰",
   ];
+
   const [{ lat, long }, setPosition] = useState<{
     lat: number;
     long: number;
@@ -46,8 +45,22 @@ export default function Navbar() {
 
     return () => clearInterval(interval);
   }, []);
+  //@ts-ignore
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
   const { data, error } = useSWR<IWeatherData>("/api/weather");
+  const { data: test } = useSWR("/api/hello");
+
+  console.log(test);
+  // useEffect(() => {
+  //   fetch("/api/weather")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setTest(data);
+  //     });
+  // }, []);
+  // console.log(test);
+
   return (
     <div className="border-y min-w-max  shadow-sm px-8 ">
       <div className="w-[1133px] flex items-center justify-between m-auto ">
