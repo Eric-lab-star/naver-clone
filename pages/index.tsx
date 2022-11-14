@@ -11,9 +11,8 @@ const Home: NextPage = () => {
       <SWRConfig
         value={{
           refreshInterval: 9000,
-          fetcher: (resource, init) => {
-            return fetch(resource, init).then((res) => res.json());
-          },
+          fetcher: (resource, init) =>
+            fetch(resource, init).then((res) => res.json()),
         }}
       >
         <div>

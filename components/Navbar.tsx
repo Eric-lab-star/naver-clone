@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import useSWR, { useSWRConfig } from "swr";
+import useSWR from "swr";
 import { IWeatherData } from "../pages/api/weather/[...location]";
+import { setCookie } from "cookies-next";
 import cls from "../utils/cls";
 import MailSvg from "./MailSvg";
 export default function Navbar() {
@@ -25,41 +26,35 @@ export default function Navbar() {
     "도서",
     "웹툰",
   ];
-
-  const [{ lat, long }, setPosition] = useState<{
+  const [coordObj, setPosition] = useState<{
     lat: number;
     long: number;
-  }>({ lat: 36, long: 127 });
+  }>();
 
   useEffect(() => {
     const geo = window.navigator.geolocation;
-    geo.getCurrentPosition((pos) =>
-      setPosition({ lat: pos.coords.latitude, long: pos.coords.longitude })
-    );
+    geo.getCurrentPosition((pos) => {
+      setPosition({ lat: pos.coords.latitude, long: pos.coords.longitude });
+      setCookie("coords", {
+        lat: pos.coords.latitude,
+        long: pos.coords.longitude,
+      });
+    });
   }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCounter((prev) => (prev += 1));
     }, 3000);
-
     return () => clearInterval(interval);
   }, []);
-  //@ts-ignore
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-  const { data, error } = useSWR<IWeatherData>("/api/weather");
-  const { data: test } = useSWR("/api/hello");
+  const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-  console.log(test);
-  // useEffect(() => {
-  //   fetch("/api/weather")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setTest(data);
-  //     });
-  // }, []);
-  // console.log(test);
+  const { data, error } = useSWR<IWeatherData>(
+    coordObj ? [`/api/weather/`, coordObj] : null,
+    fetcher
+  );
 
   return (
     <div className="border-y min-w-max  shadow-sm px-8 ">

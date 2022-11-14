@@ -49,8 +49,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const { coords } = req.cookies;
+  const { lat, long } = coords && JSON.parse(coords);
   const response = await fetch(
-    "https://api.openweathermap.org/data/2.5/weather?lat=36&lon=127&appid=d5ad214b1b044e97ed9389e018c98f45&units=metric&lang=kr"
+    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=d5ad214b1b044e97ed9389e018c98f45&units=metric&lang=kr`
   );
   const json: IWeatherData = await response.json();
   return res.status(200).json(json);
