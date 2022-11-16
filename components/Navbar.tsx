@@ -24,7 +24,7 @@ export default function Navbar() {
   ];
   return (
     <div className="border-y min-w-max  shadow-sm px-8 ">
-      <div className="w-[1133px] flex items-center justify-between m-auto ">
+      <div className="w-[1133px] relative flex items-center justify-between m-auto ">
         <ul className="flex flex-nowrap space-x-3 py-[13px]">
           <Link href={"/"}>
             <a>
@@ -35,6 +35,7 @@ export default function Navbar() {
             <NavbarItem key={value} value={value} index={index} />
           ))}
         </ul>
+
         <WeatherBanner />
       </div>
     </div>
