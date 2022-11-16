@@ -1,13 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import useSWR from "swr";
-import { IWeatherData } from "../pages/api/weather/[...location]";
-import { setCookie } from "cookies-next";
-import cls from "../utils/cls";
+import React from "react";
 import MailSvg from "./MailSvg";
+import NavbarItem from "./NavBarItems";
+import WeatherBanner from "./weatherBanner";
 export default function Navbar() {
-  const [counter, setCounter] = useState(0);
   const navList = [
     "메일",
     "카페",
@@ -26,36 +22,6 @@ export default function Navbar() {
     "도서",
     "웹툰",
   ];
-  const [coordObj, setPosition] = useState<{
-    lat: number;
-    long: number;
-  }>();
-
-  useEffect(() => {
-    const geo = window.navigator.geolocation;
-    geo.getCurrentPosition((pos) => {
-      setPosition({ lat: pos.coords.latitude, long: pos.coords.longitude });
-      setCookie("coords", {
-        lat: pos.coords.latitude,
-        long: pos.coords.longitude,
-      });
-    });
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCounter((prev) => (prev += 1));
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
-  const { data, error } = useSWR<IWeatherData>(
-    coordObj ? [`/api/weather/`, coordObj] : null,
-    fetcher
-  );
-
   return (
     <div className="border-y min-w-max  shadow-sm px-8 ">
       <div className="w-[1133px] flex items-center justify-between m-auto ">
@@ -66,47 +32,10 @@ export default function Navbar() {
             </a>
           </Link>
           {navList.map((value, index) => (
-            <Link key={value} href={`/${value}`} legacyBehavior>
-              <a
-                className={cls(
-                  "font-bold",
-                  index <= 7 ? "text-green-500" : "text-slate-800"
-                )}
-              >
-                {value}
-              </a>
-            </Link>
+            <NavbarItem key={value} value={value} index={index} />
           ))}
         </ul>
-        <div>
-          {counter % 2 === 1 && (
-            <div className="flex text-[15px] text-slate-800 items-center font-semibold space-x-1">
-              <div>
-                <span className="mr-1">습도</span>
-                {data?.main.humidity}
-              </div>
-              <div>
-                <span className="mr-1">풍속</span>
-                {data?.wind.speed}
-              </div>
-            </div>
-          )}
-          {counter % 2 === 0 && (
-            <div className="flex text-[15px] text-slate-800 items-center font-semibold space-x-1">
-              <div className=" w-[40px] h-[40px] relative">
-                {data?.weather[0]?.icon && (
-                  <Image
-                    src={` http://openweathermap.org/img/wn/${data?.weather[0].icon}@2x.png`}
-                    alt="icon"
-                    layout="fill"
-                  />
-                )}
-              </div>
-              <div>{data?.main?.temp}&#8451;</div>
-              <div>{data?.weather[0]?.description}</div>
-            </div>
-          )}
-        </div>
+        <WeatherBanner />
       </div>
     </div>
   );
