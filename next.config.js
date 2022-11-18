@@ -19,6 +19,12 @@ const nextConfig = {
         port: "",
         pathname: "**/*",
       },
+      {
+        protocol: "https",
+        hostname: "img.sbs.co.kr",
+        port: "",
+        pathname: "**/*",
+      },
     ],
   },
 };

@@ -1,19 +1,34 @@
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import cls from "../utils/cls";
 import SliderBtn from "./SliderBtn";
-import MBCJSON from "../mbcTop.json";
+import MBCJSON from "../FakeDB/MBCTop.json";
+import SBSJSON from "../FakeDB/SBSTop.json";
 import useSWR from "swr";
-import { IMBC } from "../pages/api/scrapper";
+import { IMBC, MBCDataType } from "../pages/api/mbcScrapper";
 import NewsBtn from "./NewsBtn";
 import Image from "next/image";
 import Link from "next/link";
+import { ISBS, SBSDataType } from "../pages/api/sbsScrapper";
 export default function News() {
   const [news, setNews] = useState<string>("MBC");
-  const { data: MBCDB } = useSWR<IMBC>("/api/scrapper");
+  const [DB, setDB] = useState<IMBC | ISBS>();
+  const [StaticDB, setStaticDB] = useState<MBCDataType | SBSDataType>(MBCJSON);
+  const { data: MBCDB } = useSWR<IMBC>("/api/mbcScrapper");
+  const { data: SBSDB } = useSWR<ISBS>("/api/sbsScrapper");
   const clickNews = (event: MouseEvent<HTMLDivElement>) => {
     const text = event.currentTarget.innerHTML;
     setNews((prev) => (prev = text));
   };
+  useEffect(() => {
+    if (news === "MBC") {
+      setDB((prev) => (prev = MBCDB));
+      setStaticDB((prev) => (prev = MBCJSON));
+    }
+    if (news === "SBS") {
+      setDB((prev) => (prev = SBSDB));
+      setStaticDB((prev) => (prev = SBSJSON));
+    }
+  }, [news, MBCDB, SBSDB]);
   return (
     <div>
       {/* 뉴스 버튼*/}
@@ -62,43 +77,43 @@ export default function News() {
               </span>
             </div>
             <div className="flex space-x-6">
-              {MBCDB?.data ? (
-                <Link href={MBCDB.data[0].href + ""}>
+              {DB?.data ? (
+                <Link href={DB.data[0].href + ""}>
                   <div className="w-[195px] space-y-3 hover:cursor-pointer ">
                     <div className="relative h-[132px] w-[195px]">
                       <Image
-                        src={`https:${MBCDB.data[0].imgSrc}`}
+                        src={DB.data[0].imgSrc || ""}
                         className=" bg-slate-200 h-[132px] w-[195px]"
-                        alt={`${MBCDB.data[0].title}`}
+                        alt={`${DB.data[0].title}`}
                         layout="fill"
                       />
                     </div>
                     <div className="font-bold text-[13px] hover:underline">
-                      {`https:${MBCDB.data[0].title}`}
+                      {DB.data[0].title}
                     </div>
                   </div>
                 </Link>
               ) : (
-                <Link href={MBCJSON[0].href}>
+                <Link href={StaticDB[0].href || ""}>
                   <div className="w-[195px] space-y-3 hover:cursor-pointer ">
                     <div className="relative h-[132px] w-[195px]">
                       <Image
-                        src={`https:${MBCJSON[0].imgSrc}`}
+                        src={StaticDB[0].imgSrc || ""}
                         className=" bg-slate-200 h-[132px] w-[195px]"
-                        alt={`${MBCJSON[0].title}`}
+                        alt={`${StaticDB[0].title}`}
                         layout="fill"
                       />
                     </div>
                     <div className="font-bold text-[13px] hover:underline">
-                      {`https:${MBCJSON[0].title}`}
+                      {StaticDB[0].title}
                     </div>
                   </div>
                 </Link>
               )}
               <div className="overflow-hidden ">
                 <div className="text-[13px] space-y-[0.4em] flex flex-col">
-                  {MBCDB?.ok
-                    ? MBCDB?.data?.slice(1).map((article, index) => (
+                  {DB?.ok
+                    ? DB?.data?.slice(1).map((article, index) => (
                         <a
                           href={article.href || ""}
                           key={article.id}
@@ -107,7 +122,7 @@ export default function News() {
                           {article.title}
                         </a>
                       ))
-                    : MBCJSON.map((article, index) => (
+                    : StaticDB.map((article) => (
                         <a
                           href={article.href || ""}
                           key={article.id}

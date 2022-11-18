@@ -37,7 +37,7 @@ export default async function scrapper(
         if (index === 0) {
           const img = anchor.querySelector("span.img > img");
           const imgSrc = img?.getAttribute("src");
-          return { id: index + 1, title, href, imgSrc };
+          return { id: index + 1, title, href, imgSrc: `https:${imgSrc}` };
         }
         return { id: index + 1, title, href };
       }
@@ -45,7 +45,7 @@ export default async function scrapper(
   }, topNeswSelector);
   let result: IMBC;
   const cwd = process.cwd();
-  const filePath = path.join(cwd, "mbcTop.json");
+  const filePath = path.join(cwd, "FakeDB", "mbcTop.json");
   try {
     console.log("writing file");
     fs.writeFileSync(filePath, JSON.stringify(links));
