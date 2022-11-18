@@ -2,6 +2,7 @@ import fs from "node:fs";
 import { NextApiRequest, NextApiResponse } from "next";
 import puppeteer from "puppeteer";
 import path from "node:path";
+import { getTime, Timetype } from "../../utils/getTime";
 
 export type MBCDataType = {
   title: string | undefined;
@@ -14,12 +15,15 @@ export interface IMBC {
   ok: boolean;
   err?: unknown;
   data?: MBCDataType;
+  time?: Timetype;
 }
 
 export default async function scrapper(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const time = getTime();
+
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   const url = "https://imnews.imbc.com/pc_main.html";
@@ -49,7 +53,7 @@ export default async function scrapper(
   try {
     console.log("writing file");
     fs.writeFileSync(filePath, JSON.stringify(links));
-    result = { ok: true, data: links };
+    result = { ok: true, data: links, time };
   } catch (err) {
     result = { ok: false, err };
   }

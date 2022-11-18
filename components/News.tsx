@@ -73,7 +73,11 @@ export default function News() {
                 {news}
               </span>
               <span className="text-slate-500 text-[12px] ">
-                2022.10.24 18:57 편집
+                {DB?.time
+                  ? `${DB.time.year}.${DB.time.month + 1}.${DB.time.date}. ${
+                      DB.time.hours
+                    }:${DB.time.min} 편집`
+                  : "--:-- 로딩중"}
               </span>
             </div>
             <div className="flex space-x-6">
