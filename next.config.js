@@ -13,6 +13,12 @@ const nextConfig = {
         port: "",
         pathname: "/img/wn/**",
       },
+      {
+        protocol: "https",
+        hostname: "image.imnews.imbc.com",
+        port: "",
+        pathname: "**/*",
+      },
     ],
   },
 };
