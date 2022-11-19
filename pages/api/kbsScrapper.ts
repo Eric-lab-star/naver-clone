@@ -11,7 +11,7 @@ export type SBSDataType = {
   imgSrc?: string | null | undefined;
 }[];
 
-export interface ISBS {
+export interface IKBS {
   ok: boolean;
   err?: unknown;
   data?: SBSDataType;
@@ -26,8 +26,7 @@ export default async function scrapper(
 
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  const url =
-    "https://news.sbs.co.kr/news/newsMain.do?plink=GNB&cooper=SBSNEWS";
+  const url = "https://news.kbs.co.kr/common/main.html";
   await page.goto(url);
 
   const topNewsSelector =
@@ -43,31 +42,31 @@ export default async function scrapper(
           .replaceAll("\t", "")
           .replaceAll("\n", "");
 
-        return { id: index + 1, title, href: `https://news.sbs.co.kr/${href}` };
+        return { id: index + 1, title, href: `https://news.kbs.co.kr${href}` };
       }
     );
   }, topNewsSelector);
 
   const headNewsSelector =
-    "#container > div > div.w_box.w_headline > div.w_head_list > div.head_area > div > div.w_news_list.type_head > ul > li > a";
+    "#content > div.m-section.main-headline.type1 > div > ul:nth-child(2) > li > a";
 
   await page.waitForSelector(headNewsSelector);
 
   const headLink = await page.evaluate((headNewsSelector) => {
     const anchor = document.querySelector(headNewsSelector);
     const href = anchor?.getAttribute("href");
-    const img = anchor?.querySelector("span.thumb > img");
+    const img = anchor?.querySelector("span.img-center > img");
     const imgSrc = img?.getAttribute("src");
-    const title = img?.getAttribute("alt");
+    const title = img?.getAttribute("alt")?.replace(/(<br>)/g, "");
     return {
       title,
-      imgSrc: `https:${imgSrc}`,
-      href: `https://news.sbs.co.kr/${href}`,
+      imgSrc: `https://news.kbs.co.kr${imgSrc}`,
+      href: `https://news.kbs.co.kr${href}`,
       id: 0,
     };
   }, headNewsSelector);
 
-  let result: ISBS;
+  let result: IKBS;
   const cwd = process.cwd();
   const filePath = path.join(cwd, "FakeDB", "KBSTop.json");
 

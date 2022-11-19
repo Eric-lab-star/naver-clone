@@ -25,6 +25,12 @@ const nextConfig = {
 
         pathname: "**/*",
       },
+      {
+        protocol: "https",
+        hostname: "news.kbs.co.kr",
+
+        pathname: "**/*",
+      },
     ],
   },
 };

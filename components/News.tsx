@@ -3,18 +3,21 @@ import cls from "../utils/cls";
 import SliderBtn from "./SliderBtn";
 import MBCJSON from "../FakeDB/MBCTop.json";
 import SBSJSON from "../FakeDB/SBSTop.json";
+import KBSJSON from "../FakeDB/KBSTop.json";
 import useSWR from "swr";
 import { IMBC, MBCDataType } from "../pages/api/mbcScrapper";
 import NewsBtn from "./NewsBtn";
 import Image from "next/image";
 import Link from "next/link";
 import { ISBS, SBSDataType } from "../pages/api/sbsScrapper";
+import { IKBS } from "../pages/api/kbsScrapper";
 export default function News() {
   const [news, setNews] = useState<string>("MBC");
   const [DB, setDB] = useState<IMBC | ISBS>();
   const [StaticDB, setStaticDB] = useState<MBCDataType | SBSDataType>(MBCJSON);
   const { data: MBCDB } = useSWR<IMBC>("/api/mbcScrapper");
   const { data: SBSDB } = useSWR<ISBS>("/api/sbsScrapper");
+  const { data: KBSDB } = useSWR<IKBS>("/api/kbsScrapper");
   const clickNews = (event: MouseEvent<HTMLDivElement>) => {
     const text = event.currentTarget.innerHTML;
     setNews((prev) => (prev = text));
@@ -28,7 +31,11 @@ export default function News() {
       setDB((prev) => (prev = SBSDB));
       setStaticDB((prev) => (prev = SBSJSON));
     }
-  }, [news, MBCDB, SBSDB]);
+    if (news === "KBS") {
+      setDB((prev) => (prev = KBSDB));
+      setStaticDB((prev) => (prev = KBSJSON));
+    }
+  }, [news, MBCDB, SBSDB, KBSDB]);
   return (
     <div>
       {/* 뉴스 버튼*/}
