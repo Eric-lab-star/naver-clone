@@ -58,7 +58,10 @@ export default async function scrapper(
   const filePath = path.join(cwd, "FakeDB", "KBSTop.json");
 
   try {
-    fs.writeFileSync(filePath, JSON.stringify([headLink, ...links]));
+    fs.writeFileSync(
+      filePath,
+      JSON.stringify({ data: [headLink, ...links], time })
+    );
     result = {
       ok: true,
       data: [headLink, ...links],

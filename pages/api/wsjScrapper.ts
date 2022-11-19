@@ -11,7 +11,7 @@ export default async function scrapper(
 ) {
   const time = getTime();
 
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch();
   const page = await browser.newPage();
   const url = "https://www.wsj.com/?mod=wsjheader_logo";
   await page.goto(url);
@@ -35,25 +35,25 @@ export default async function scrapper(
   const headNewsSelector =
     "#most-popular-opinion-articles > ol > li:nth-child(1) > a";
 
-  console.log("waiting for headerselector");
   await page.waitForSelector(headNewsSelector);
-  const headNewsHandle = await page.$(headNewsSelector);
-  const headLink = await page.evaluate((headNewsHandle) => {
-    const href = headNewsHandle?.getAttribute("href");
-    const title = headNewsHandle?.getAttribute(
+  const headLink = await page.evaluate((headNewsSelector) => {
+    const anchor = document.querySelector(headNewsSelector);
+    const href = anchor?.getAttribute("href");
+    const title = anchor?.querySelector(
       "h3.WSJTheme--headline--nQ8J-FfZ "
-    );
-    return { href, title, id: 0, imgSrc: "" };
-  }, headNewsHandle);
-  await headNewsHandle?.click();
+    )?.innerHTML;
+    return { href, title, id: 0, imgSrc: null };
+  }, headNewsSelector);
 
   let result: ScrapeType;
   const cwd = process.cwd();
   const filePath = path.join(cwd, "FakeDB", "wsjTop.json");
 
   try {
-    console.log("writing file");
-    fs.writeFileSync(filePath, JSON.stringify([headLink, ...links]));
+    fs.writeFileSync(
+      filePath,
+      JSON.stringify({ data: [headLink, ...links], time })
+    );
     result = {
       ok: true,
       data: [headLink, ...links],

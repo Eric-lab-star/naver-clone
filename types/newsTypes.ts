@@ -7,6 +7,11 @@ export type ScrapeType = {
   time?: Timetype;
 };
 
+export type StaticType = {
+  data: DataType;
+  time: Timetype;
+};
+
 export type DataType = {
   title: string | undefined | null;
   href: string | null | undefined;

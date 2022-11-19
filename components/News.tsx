@@ -4,19 +4,22 @@ import SliderBtn from "./SliderBtn";
 import MBCJSON from "../FakeDB/MBCTop.json";
 import SBSJSON from "../FakeDB/SBSTop.json";
 import KBSJSON from "../FakeDB/KBSTop.json";
+import WSJJSON from "../FakeDB/wsjTop.json";
 import useSWR from "swr";
 import NewsBtn from "./NewsBtn";
 import Image from "next/image";
 import Link from "next/link";
-import { DataType, ScrapeType } from "../types/newsTypes";
+import naver from "../public/naverTop.png";
+import { ScrapeType, StaticType } from "../types/newsTypes";
 
 export default function News() {
   const [news, setNews] = useState<string>("MBC");
   const [DB, setDB] = useState<ScrapeType>();
-  const [StaticDB, setStaticDB] = useState<DataType>(MBCJSON);
+  const [StaticDB, setStaticDB] = useState<StaticType>(MBCJSON);
   const { data: MBCDB } = useSWR<ScrapeType>("/api/mbcScrapper");
   const { data: SBSDB } = useSWR<ScrapeType>("/api/sbsScrapper");
   const { data: KBSDB } = useSWR<ScrapeType>("/api/kbsScrapper");
+  const { data: WSJDB } = useSWR<ScrapeType>("/api/wsjScrapper");
   const clickNews = (event: MouseEvent<HTMLDivElement>) => {
     const text = event.currentTarget.innerHTML;
     setNews((prev) => (prev = text));
@@ -34,7 +37,11 @@ export default function News() {
       setDB((prev) => (prev = KBSDB));
       setStaticDB((prev) => (prev = KBSJSON));
     }
-  }, [news, MBCDB, SBSDB, KBSDB]);
+    if (news === "WSJ") {
+      setDB((prev) => (prev = WSJDB));
+      setStaticDB((prev) => (prev = WSJJSON));
+    }
+  }, [news, MBCDB, SBSDB, KBSDB, WSJDB]);
   return (
     <div>
       {/* 뉴스 버튼*/}
@@ -43,33 +50,18 @@ export default function News() {
       <div className="h-[260px] border-slate-200 flex relative ">
         {/** 뉴스 구독 리스트 */}
         <div className="w-[165px] flex-none py-4 bg-slate-100 border border-slate-200 text-sm flex flex-col px-4 space-y-3 overflow-scroll">
-          <div
-            onClick={clickNews}
-            className={cls(
-              "hover:cursor-pointer hover:underline  px-5  ",
-              news === "MBC" ? "bg-blue-800 rounded-3xl text-white py-2" : ""
-            )}
-          >
-            MBC
-          </div>
-          <div
-            onClick={clickNews}
-            className={cls(
-              "hover:cursor-pointer hover:underline  px-5  ",
-              news === "SBS" ? "bg-blue-800 rounded-3xl text-white py-2" : ""
-            )}
-          >
-            SBS
-          </div>
-          <div
-            onClick={clickNews}
-            className={cls(
-              "hover:cursor-pointer hover:underline  px-5  ",
-              news === "KBS" ? "bg-blue-800 rounded-3xl text-white py-2" : ""
-            )}
-          >
-            KBS
-          </div>
+          {["MBC", "SBS", "KBS", "WSJ"].map((v) => (
+            <div
+              key={v}
+              onClick={clickNews}
+              className={cls(
+                "hover:cursor-pointer hover:underline  px-5  ",
+                news === v ? "bg-blue-800 rounded-3xl text-white py-2" : ""
+              )}
+            >
+              {v}
+            </div>
+          ))}
         </div>
         {/** 주요 뉴스 */}
         <div className="border-y  w-[570px] px-6 py-4 border-slate-200 ">
@@ -83,7 +75,9 @@ export default function News() {
                   ? `${DB.time.year}.${DB.time.month + 1}.${DB.time.date}. ${
                       DB.time.hours
                     }:${DB.time.min} 편집`
-                  : "--:-- 로딩중"}
+                  : `${StaticDB.time.year}.${StaticDB.time.month + 1}.${
+                      StaticDB.time.date
+                    }. ${StaticDB.time.hours}:${StaticDB.time.min} 편집`}
               </span>
             </div>
             <div className="flex space-x-6">
@@ -92,7 +86,7 @@ export default function News() {
                   <div className="w-[195px] space-y-3 hover:cursor-pointer ">
                     <div className="relative h-[132px] w-[195px]">
                       <Image
-                        src={DB.data[0].imgSrc || ""}
+                        src={DB.data[0].imgSrc || naver}
                         className=" bg-slate-200 h-[132px] w-[195px]"
                         alt={`${DB.data[0].title}`}
                         layout="fill"
@@ -104,18 +98,18 @@ export default function News() {
                   </div>
                 </Link>
               ) : (
-                <Link href={StaticDB[0].href || ""}>
+                <Link href={StaticDB.data[0].href || ""}>
                   <div className="w-[195px] space-y-3 hover:cursor-pointer ">
                     <div className="relative h-[132px] w-[195px]">
                       <Image
-                        src={StaticDB[0].imgSrc || ""}
+                        src={StaticDB.data[0].imgSrc || ""}
                         className=" bg-slate-200 h-[132px] w-[195px]"
-                        alt={`${StaticDB[0].title}`}
+                        alt={`${StaticDB.data[0].title}`}
                         layout="fill"
                       />
                     </div>
                     <div className="font-bold text-[13px] hover:underline">
-                      {StaticDB[0].title}
+                      {StaticDB.data[0].title}
                     </div>
                   </div>
                 </Link>
@@ -132,7 +126,7 @@ export default function News() {
                           {article.title}
                         </a>
                       ))
-                    : StaticDB.map((article) => (
+                    : StaticDB.data.map((article) => (
                         <a
                           href={article.href || ""}
                           key={article.id}

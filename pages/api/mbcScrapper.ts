@@ -38,7 +38,7 @@ export default async function scrapper(
   const cwd = process.cwd();
   const filePath = path.join(cwd, "FakeDB", "mbcTop.json");
   try {
-    fs.writeFileSync(filePath, JSON.stringify(links));
+    fs.writeFileSync(filePath, JSON.stringify({ data: links, time }));
     result = { ok: true, data: links, time };
   } catch (err) {
     result = { ok: false, err };
