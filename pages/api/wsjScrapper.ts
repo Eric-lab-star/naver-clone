@@ -34,31 +34,18 @@ export default async function scrapper(
 
   const headNewsSelector =
     "#most-popular-opinion-articles > ol > li:nth-child(1) > a";
-  const imgSelector =
-    "#most-popular-opinion-articles > ol > li:nth-child(1) > a > div.WSJTheme--thumb--DOohBjR2 > div.WSJTheme--image-container--3BUONb0N > div > div > div > img";
 
   console.log("waiting for headerselector");
   await page.waitForSelector(headNewsSelector);
-  console.log("waiting for imgselector");
-  // await page.waitForSelector(imgSelector);
-  const headLink = await page.evaluate(
-    ([headNewsSelector, imgSelector]) => {
-      const anchor = document.querySelector(headNewsSelector);
-      const href = anchor?.getAttribute("href");
-      const img = document.querySelector(imgSelector);
-      const imgSrc = img?.getAttribute("src");
-      const title = anchor?.querySelector(
-        "h3.WSJTheme--headline--nQ8J-FfZ"
-      )?.innerHTML;
-      return {
-        title,
-        imgSrc,
-        href,
-        id: 0,
-      };
-    },
-    [headNewsSelector, imgSelector]
-  );
+  const headNewsHandle = await page.$(headNewsSelector);
+  const headLink = await page.evaluate((headNewsHandle) => {
+    const href = headNewsHandle?.getAttribute("href");
+    const title = headNewsHandle?.getAttribute(
+      "h3.WSJTheme--headline--nQ8J-FfZ "
+    );
+    return { href, title, id: 0, imgSrc: "" };
+  }, headNewsHandle);
+  await headNewsHandle?.click();
 
   let result: ScrapeType;
   const cwd = process.cwd();
