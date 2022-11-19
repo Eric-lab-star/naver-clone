@@ -2,21 +2,8 @@ import fs from "node:fs";
 import { NextApiRequest, NextApiResponse } from "next";
 import puppeteer from "puppeteer";
 import path from "node:path";
-import { getTime, Timetype } from "../../utils/getTime";
-
-export type SBSDataType = {
-  title: string | undefined | null;
-  href: string | null | undefined;
-  id: number;
-  imgSrc?: string | null | undefined;
-}[];
-
-export interface IKBS {
-  ok: boolean;
-  err?: unknown;
-  data?: SBSDataType;
-  time?: Timetype;
-}
+import { getTime } from "../../utils/getTime";
+import { ScrapeType } from "../../types/newsTypes";
 
 export default async function scrapper(
   req: NextApiRequest,
@@ -66,12 +53,11 @@ export default async function scrapper(
     };
   }, headNewsSelector);
 
-  let result: IKBS;
+  let result: ScrapeType;
   const cwd = process.cwd();
   const filePath = path.join(cwd, "FakeDB", "KBSTop.json");
 
   try {
-    console.log("writing file");
     fs.writeFileSync(filePath, JSON.stringify([headLink, ...links]));
     result = {
       ok: true,

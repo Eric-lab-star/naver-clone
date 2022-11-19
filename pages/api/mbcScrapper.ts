@@ -2,21 +2,8 @@ import fs from "node:fs";
 import { NextApiRequest, NextApiResponse } from "next";
 import puppeteer from "puppeteer";
 import path from "node:path";
-import { getTime, Timetype } from "../../utils/getTime";
-
-export type MBCDataType = {
-  title: string | undefined;
-  href: string | null;
-  id: number;
-  imgSrc?: string | null | undefined;
-}[];
-
-export interface IMBC {
-  ok: boolean;
-  err?: unknown;
-  data?: MBCDataType;
-  time?: Timetype;
-}
+import { getTime } from "../../utils/getTime";
+import { ScrapeType } from "../../types/newsTypes";
 
 export default async function scrapper(
   req: NextApiRequest,
@@ -47,11 +34,10 @@ export default async function scrapper(
       }
     );
   }, topNeswSelector);
-  let result: IMBC;
+  let result: ScrapeType;
   const cwd = process.cwd();
   const filePath = path.join(cwd, "FakeDB", "mbcTop.json");
   try {
-    console.log("writing file");
     fs.writeFileSync(filePath, JSON.stringify(links));
     result = { ok: true, data: links, time };
   } catch (err) {

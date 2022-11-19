@@ -5,19 +5,18 @@ import MBCJSON from "../FakeDB/MBCTop.json";
 import SBSJSON from "../FakeDB/SBSTop.json";
 import KBSJSON from "../FakeDB/KBSTop.json";
 import useSWR from "swr";
-import { IMBC, MBCDataType } from "../pages/api/mbcScrapper";
 import NewsBtn from "./NewsBtn";
 import Image from "next/image";
 import Link from "next/link";
-import { ISBS, SBSDataType } from "../pages/api/sbsScrapper";
-import { IKBS } from "../pages/api/kbsScrapper";
+import { DataType, ScrapeType } from "../types/newsTypes";
+
 export default function News() {
   const [news, setNews] = useState<string>("MBC");
-  const [DB, setDB] = useState<IMBC | ISBS>();
-  const [StaticDB, setStaticDB] = useState<MBCDataType | SBSDataType>(MBCJSON);
-  const { data: MBCDB } = useSWR<IMBC>("/api/mbcScrapper");
-  const { data: SBSDB } = useSWR<ISBS>("/api/sbsScrapper");
-  const { data: KBSDB } = useSWR<IKBS>("/api/kbsScrapper");
+  const [DB, setDB] = useState<ScrapeType>();
+  const [StaticDB, setStaticDB] = useState<DataType>(MBCJSON);
+  const { data: MBCDB } = useSWR<ScrapeType>("/api/mbcScrapper");
+  const { data: SBSDB } = useSWR<ScrapeType>("/api/sbsScrapper");
+  const { data: KBSDB } = useSWR<ScrapeType>("/api/kbsScrapper");
   const clickNews = (event: MouseEvent<HTMLDivElement>) => {
     const text = event.currentTarget.innerHTML;
     setNews((prev) => (prev = text));
