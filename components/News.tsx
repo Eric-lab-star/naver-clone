@@ -16,32 +16,37 @@ export default function News() {
   const [news, setNews] = useState<string>("MBC");
   const [DB, setDB] = useState<ScrapeType>();
   const [StaticDB, setStaticDB] = useState<StaticType>(MBCJSON);
-  const { data: MBCDB } = useSWR<ScrapeType>("/api/mbcScrapper");
-  const { data: SBSDB } = useSWR<ScrapeType>("/api/sbsScrapper");
-  const { data: KBSDB } = useSWR<ScrapeType>("/api/kbsScrapper");
-  const { data: WSJDB } = useSWR<ScrapeType>("/api/wsjScrapper");
+  // const { data: MBCDB } = useSWR<ScrapeType>("/api/mbcScrapper");
+  // const { data: SBSDB } = useSWR<ScrapeType>("/api/sbsScrapper");
+  // const { data: KBSDB } = useSWR<ScrapeType>("/api/kbsScrapper");
+  // const { data: WSJDB } = useSWR<ScrapeType>("/api/wsjScrapper");
+  useEffect(() => {
+    fetch("/api/ytScraper", {
+      headers: { "Access-Control-Allow-Origin": "*" },
+    });
+  }, []);
   const clickNews = (event: MouseEvent<HTMLDivElement>) => {
     const text = event.currentTarget.innerHTML;
     setNews((prev) => (prev = text));
   };
-  useEffect(() => {
-    if (news === "MBC") {
-      setDB((prev) => (prev = MBCDB));
-      setStaticDB((prev) => (prev = MBCJSON));
-    }
-    if (news === "SBS") {
-      setDB((prev) => (prev = SBSDB));
-      setStaticDB((prev) => (prev = SBSJSON));
-    }
-    if (news === "KBS") {
-      setDB((prev) => (prev = KBSDB));
-      setStaticDB((prev) => (prev = KBSJSON));
-    }
-    if (news === "WSJ") {
-      setDB((prev) => (prev = WSJDB));
-      setStaticDB((prev) => (prev = WSJJSON));
-    }
-  }, [news, MBCDB, SBSDB, KBSDB, WSJDB]);
+  // useEffect(() => {
+  //   if (news === "MBC") {
+  //     setDB((prev) => (prev = MBCDB));
+  //     setStaticDB((prev) => (prev = MBCJSON));
+  //   }
+  //   if (news === "SBS") {
+  //     setDB((prev) => (prev = SBSDB));
+  //     setStaticDB((prev) => (prev = SBSJSON));
+  //   }
+  //   if (news === "KBS") {
+  //     setDB((prev) => (prev = KBSDB));
+  //     setStaticDB((prev) => (prev = KBSJSON));
+  //   }
+  //   if (news === "WSJ") {
+  //     setDB((prev) => (prev = WSJDB));
+  //     setStaticDB((prev) => (prev = WSJJSON));
+  //   }
+  // }, [news, MBCDB, SBSDB, KBSDB, WSJDB]);
   return (
     <div>
       {/* 뉴스 버튼*/}
@@ -86,7 +91,7 @@ export default function News() {
                   <div className="w-[195px] space-y-3 hover:cursor-pointer ">
                     <div className="relative h-[132px] w-[195px]">
                       <Image
-                        src={DB.data[0].imgSrc || naver}
+                        src={DB.data[0].imgSrc || ""}
                         className=" bg-slate-200 h-[132px] w-[195px]"
                         alt={`${DB.data[0].title}`}
                         layout="fill"
