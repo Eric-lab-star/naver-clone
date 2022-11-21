@@ -5,7 +5,8 @@ import Contents from "../components/Contents";
 import Footer from "../components/Footer";
 import { SWRConfig } from "swr";
 import { SWRDevTools } from "swr-devtools";
-const Home: NextPage = () => {
+
+function Home() {
   return (
     <SWRDevTools>
       <SWRConfig
@@ -24,6 +25,6 @@ const Home: NextPage = () => {
       </SWRConfig>
     </SWRDevTools>
   );
-};
+}
 
 export default Home;

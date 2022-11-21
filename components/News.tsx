@@ -11,14 +11,12 @@ import useSWR from "swr";
 import NewsBtn from "./NewsBtn";
 import Image from "next/image";
 import Link from "next/link";
-import naver from "../public/naverTop.png";
 import { ScrapeType, StaticType } from "../types/newsTypes";
-import { getCookie } from "cookies-next";
 
 export default function News() {
-  const [news, setNews] = useState<string>("MBC");
+  const [news, setNews] = useState<string>("KBS");
   const [DB, setDB] = useState<ScrapeType>();
-  const [StaticDB, setStaticDB] = useState<StaticType>(MBCJSON);
+  const [StaticDB, setStaticDB] = useState<StaticType>(KBSJSON);
   const { data: MBCDB } = useSWR<ScrapeType>("/api/mbcScrapper");
   const { data: SBSDB } = useSWR<ScrapeType>("/api/sbsScrapper");
   const { data: KBSDB } = useSWR<ScrapeType>("/api/kbsScrapper");
@@ -30,6 +28,11 @@ export default function News() {
     const text = event.currentTarget.innerHTML;
     setNews((prev) => (prev = text));
   };
+  useEffect(() => {
+    if (KBSDB) {
+      setDB(KBSDB);
+    }
+  }, [KBSDB]);
   const newsList = ["MBC", "SBS", "KBS", "WSJ", "JTBC", "YTN"];
   useEffect(() => {
     if (news === "MBC") {

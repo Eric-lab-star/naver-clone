@@ -37,6 +37,11 @@ const nextConfig = {
         hostname: "image.ytn.co.kr",
         pathname: "**/*",
       },
+      {
+        protocol: "https",
+        hostname: "ssl.pstatic.net",
+        pathname: "**/*",
+      },
     ],
   },
 };

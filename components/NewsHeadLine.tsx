@@ -1,16 +1,33 @@
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import useSWR from "swr";
+import { ScrapeType } from "../types/newsTypes";
 import ChevronLeft from "./ChevronRight";
 
 export default function NewsHeadLine() {
+  const { data: DB } = useSWR<ScrapeType>("/api/ytnScraper");
+  const [index, setIndex] = useState(0);
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      setIndex((prev) => (prev = prev + 1));
+    }, 3000);
+    return () => clearInterval(timerId);
+  }, []);
+  console.log(index);
+
   return (
     <div className="bg-slate-100 px-3 flex items-center justify-between border border-slate-300">
-      <div className=" text-sm h-[50px] flex items-center">
+      <div className=" relative text-sm h-[50px] flex items-center">
         <div className="flex items-center">
           <div className="font-bold ">연합뉴스</div>
           <ChevronLeft className="w-[13.5px] text-slate-600" />
         </div>
-        <div className="w-[305px]  truncate">
-          정기석, &quot;실내 마스크, 지금은 벗을 상황 아니야 3개월은
-          참아야&quot;
+        <div className="w-[305px] absolute left-20 truncate">
+          {/* {DB?.data ? 
+           <Link href={DB.data[0].href || ""} key={DB.data[0].id}>
+            <div>{DB.data[0].title}</div>
+          </Link>:
+          null} */}
         </div>
       </div>
       <div className="flex font-bold text-sm space-x-2">
