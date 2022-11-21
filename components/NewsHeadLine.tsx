@@ -9,10 +9,13 @@ export default function NewsHeadLine() {
   const [index, setIndex] = useState(0);
   useEffect(() => {
     const timerId = setInterval(() => {
+      if (index >= 6) {
+        setIndex((prev) => (prev = 0));
+      }
       setIndex((prev) => (prev = prev + 1));
     }, 3000);
     return () => clearInterval(timerId);
-  }, []);
+  }, [index]);
   console.log(index);
 
   return (
@@ -22,12 +25,12 @@ export default function NewsHeadLine() {
           <div className="font-bold ">연합뉴스</div>
           <ChevronLeft className="w-[13.5px] text-slate-600" />
         </div>
-        <div className="w-[305px] absolute left-20 truncate">
-          {/* {DB?.data ? 
-           <Link href={DB.data[0].href || ""} key={DB.data[0].id}>
-            <div>{DB.data[0].title}</div>
-          </Link>:
-          null} */}
+        <div className="w-[320px] absolute left-20 truncate bg-amber-100">
+          {DB?.data ? (
+            <Link href={DB.data[index].href || ""} key={DB.data[index].id}>
+              <div>{DB.data[index].title}</div>
+            </Link>
+          ) : null}
         </div>
       </div>
       <div className="flex font-bold text-sm space-x-2">
