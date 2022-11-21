@@ -25,10 +25,10 @@ export default function NewsHeadLine() {
           <div className="font-bold ">연합뉴스</div>
           <ChevronLeft className="w-[13.5px] text-slate-600" />
         </div>
-        <div className="w-[320px] absolute left-20 truncate bg-amber-100">
+        <div className="w-[320px] absolute left-20  line-clamp-1">
           {DB?.data ? (
             <Link href={DB.data[index].href || ""} key={DB.data[index].id}>
-              <div>{DB.data[index].title}</div>
+              <div className="truncate">{DB.data[index].title}</div>
             </Link>
           ) : null}
         </div>
