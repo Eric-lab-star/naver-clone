@@ -5,48 +5,58 @@ import MBCJSON from "../FakeDB/MBCTop.json";
 import SBSJSON from "../FakeDB/SBSTop.json";
 import KBSJSON from "../FakeDB/KBSTop.json";
 import WSJJSON from "../FakeDB/wsjTop.json";
+import JTBCJSON from "../FakeDB/JTBCTop.json";
+import YTNJSON from "../FakeDB/YTNTop.json";
 import useSWR from "swr";
 import NewsBtn from "./NewsBtn";
 import Image from "next/image";
 import Link from "next/link";
 import naver from "../public/naverTop.png";
 import { ScrapeType, StaticType } from "../types/newsTypes";
+import { getCookie } from "cookies-next";
 
 export default function News() {
   const [news, setNews] = useState<string>("MBC");
   const [DB, setDB] = useState<ScrapeType>();
   const [StaticDB, setStaticDB] = useState<StaticType>(MBCJSON);
-  // const { data: MBCDB } = useSWR<ScrapeType>("/api/mbcScrapper");
-  // const { data: SBSDB } = useSWR<ScrapeType>("/api/sbsScrapper");
-  // const { data: KBSDB } = useSWR<ScrapeType>("/api/kbsScrapper");
-  // const { data: WSJDB } = useSWR<ScrapeType>("/api/wsjScrapper");
-  useEffect(() => {
-    fetch("/api/ytScraper", {
-      headers: { "Access-Control-Allow-Origin": "*" },
-    });
-  }, []);
+  const { data: MBCDB } = useSWR<ScrapeType>("/api/mbcScrapper");
+  const { data: SBSDB } = useSWR<ScrapeType>("/api/sbsScrapper");
+  const { data: KBSDB } = useSWR<ScrapeType>("/api/kbsScrapper");
+  const { data: WSJDB } = useSWR<ScrapeType>("/api/wsjScrapper");
+  const { data: YTAPI } = useSWR("/api/ytScraper");
+  const { data: JTBCDB } = useSWR<ScrapeType>("/api/jtbcScraper");
+  const { data: YTNDB } = useSWR<ScrapeType>("/api/ytnScraper");
   const clickNews = (event: MouseEvent<HTMLDivElement>) => {
     const text = event.currentTarget.innerHTML;
     setNews((prev) => (prev = text));
   };
-  // useEffect(() => {
-  //   if (news === "MBC") {
-  //     setDB((prev) => (prev = MBCDB));
-  //     setStaticDB((prev) => (prev = MBCJSON));
-  //   }
-  //   if (news === "SBS") {
-  //     setDB((prev) => (prev = SBSDB));
-  //     setStaticDB((prev) => (prev = SBSJSON));
-  //   }
-  //   if (news === "KBS") {
-  //     setDB((prev) => (prev = KBSDB));
-  //     setStaticDB((prev) => (prev = KBSJSON));
-  //   }
-  //   if (news === "WSJ") {
-  //     setDB((prev) => (prev = WSJDB));
-  //     setStaticDB((prev) => (prev = WSJJSON));
-  //   }
-  // }, [news, MBCDB, SBSDB, KBSDB, WSJDB]);
+  const newsList = ["MBC", "SBS", "KBS", "WSJ", "JTBC", "YTN"];
+  useEffect(() => {
+    if (news === "MBC") {
+      setDB((prev) => (prev = MBCDB));
+      setStaticDB((prev) => (prev = MBCJSON));
+    }
+    if (news === "SBS") {
+      setDB((prev) => (prev = SBSDB));
+      setStaticDB((prev) => (prev = SBSJSON));
+    }
+    if (news === "KBS") {
+      setDB((prev) => (prev = KBSDB));
+      setStaticDB((prev) => (prev = KBSJSON));
+    }
+    if (news === "WSJ") {
+      setDB((prev) => (prev = WSJDB));
+      setStaticDB((prev) => (prev = WSJJSON));
+    }
+    if (news === "JTBC") {
+      setDB((prev) => (prev = JTBCDB));
+      setStaticDB((prev) => (prev = JTBCJSON));
+    }
+    if (news === "YTN") {
+      setDB((prev) => (prev = YTNDB));
+      setStaticDB((prev) => (prev = YTNJSON));
+    }
+  }, [news, MBCDB, SBSDB, KBSDB, WSJDB, JTBCDB, YTNDB]);
   return (
     <div>
       {/* 뉴스 버튼*/}
@@ -55,7 +65,7 @@ export default function News() {
       <div className="h-[260px] border-slate-200 flex relative ">
         {/** 뉴스 구독 리스트 */}
         <div className="w-[165px] flex-none py-4 bg-slate-100 border border-slate-200 text-sm flex flex-col px-4 space-y-3 overflow-scroll">
-          {["MBC", "SBS", "KBS", "WSJ"].map((v) => (
+          {newsList.map((v) => (
             <div
               key={v}
               onClick={clickNews}
@@ -131,7 +141,7 @@ export default function News() {
                           {article.title}
                         </a>
                       ))
-                    : StaticDB.data.map((article) => (
+                    : StaticDB.data.slice(1).map((article) => (
                         <a
                           href={article.href || ""}
                           key={article.id}

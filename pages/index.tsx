@@ -10,6 +10,7 @@ const Home: NextPage = () => {
     <SWRDevTools>
       <SWRConfig
         value={{
+          revalidateOnFocus: false,
           fetcher: (resource, init) =>
             fetch(resource, init).then((res) => res.json()),
         }}

@@ -35,7 +35,6 @@ export default function Navbar() {
             <NavbarItem key={value} value={value} index={index} />
           ))}
         </ul>
-
         <WeatherBanner />
       </div>
     </div>
