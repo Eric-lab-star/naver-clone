@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import cls from "../utils/cls";
+import cls from "../../utils/cls";
 
 const NavBarItem = function NavbarItem({
   value,

@@ -1,6 +1,6 @@
-import ChevronLeft from "./ChevronLeft";
-import ChevronRight from "./ChevronRight";
-import PlusSVG from "./Plus";
+import ChevronLeft from "./SVG/ChevronLeftSVG";
+import ChevronRight from "./SVG/ChevronRightSVG";
+import PlusSVG from "./SVG/PlusSVG";
 
 export default function TrendShopping() {
   return (

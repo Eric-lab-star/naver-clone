@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { BookDB } from "../FakeDB/BookDB";
-import { VideoDB } from "../FakeDB/VideoDB";
-import cls from "../utils/cls";
-import ChevronLeft from "./ChevronLeft";
-import ChevronRight from "./ChevronRight";
-import HStack from "./HStack";
-import MoreArticles from "./MoreArticles";
-import SHStack from "./SHStack";
-import VideoGridItem from "./VideoGridItem";
+import { BookDB } from "../../FakeDB/BookDB";
+import { VideoDB } from "../../FakeDB/VideoDB";
+import cls from "../../utils/cls";
+import ChevronLeft from "../SVG/ChevronLeftSVG";
+import ChevronRight from "../SVG/ChevronRightSVG";
+import HStack from "../utils/HStack";
+import MoreArticles from "../utils/Btn/MoreArticlesBtn";
+import SHStack from "../utils/SHStack";
+import VideoGridItem from "../utils/VideoGridItem";
 
 export default function Cars({ category }: { category: string }) {
   const [{ pageIndex, page }, setPageIndex] = useState<{

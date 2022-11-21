@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 import { ScrapeType } from "../types/newsTypes";
-import ChevronLeft from "./ChevronRight";
+import ChevronLeft from "./SVG/ChevronRightSVG";
 
 export default function NewsHeadLine() {
   const { data: DB } = useSWR<ScrapeType>("/api/ytnScraper");

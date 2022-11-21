@@ -1,4 +1,4 @@
-import ChevronLeft from "./ChevronRight";
+import ChevronLeft from "./SVG/ChevronRightSVG";
 
 export default function Footer() {
   return (

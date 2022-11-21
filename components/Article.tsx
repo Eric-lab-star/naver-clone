@@ -1,13 +1,13 @@
-import SliderBtn from "./SliderBtn";
+import SliderBtn from "./utils/Btn/SliderBtn";
 import { MouseEvent, useState } from "react";
-import CategoryBar from "./CategoryBar";
-import Economy from "./Economy";
-import Books from "./Books";
-import Living from "./Living";
+import CategoryBar from "./utils/CategoryBar";
+import Economy from "./Articles/Economy";
+import Books from "./Articles/Books";
+import Living from "./Articles/Living";
 import SectionHeader from "./SectionHeader";
-import Cars from "./Cars";
-import WebToon from "./WebToon";
-import Fashion from "./Fashion";
+import Cars from "./Articles/Cars";
+import WebToon from "./Articles/WebToon";
+import Fashion from "./Articles/Fashion";
 export default function Article() {
   const [category, setCategory] = useState<string>("웹툰");
   const onClick = (event: MouseEvent<HTMLDivElement>) => {

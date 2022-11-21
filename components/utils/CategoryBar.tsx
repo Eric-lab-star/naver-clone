@@ -1,5 +1,5 @@
 import { MouseEvent } from "react";
-import { CategoryDB } from "../FakeDB/CategoryDB";
+import { CategoryDB } from "../../FakeDB/CategoryDB";
 export default function CategoryBar({
   category,
   onClick,

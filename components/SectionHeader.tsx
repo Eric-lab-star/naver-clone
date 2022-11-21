@@ -1,4 +1,4 @@
-import CogSVG from "./Cog";
+import CogSVG from "./SVG/CogSVG";
 
 interface IHeader {
   title: string;

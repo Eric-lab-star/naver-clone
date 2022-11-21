@@ -1,4 +1,4 @@
-import cls from "../utils/cls";
+import cls from "../../utils/cls";
 
 export default function ChevronRight({ className }: { className: string }) {
   return (

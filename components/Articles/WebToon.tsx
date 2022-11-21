@@ -1,12 +1,12 @@
 import { MouseEvent, useState } from "react";
-import { VideoDB } from "../FakeDB/VideoDB";
-import { WebToonDB } from "../FakeDB/WebToonDB";
-import cls from "../utils/cls";
-import ChevronLeft from "./ChevronLeft";
-import ChevronRight from "./ChevronRight";
-import SHStack from "./SHStack";
-import VideoGridItem from "./VideoGridItem";
-import WebToonTrendingItem from "./WebToonTrendItem";
+import { VideoDB } from "../../FakeDB/VideoDB";
+import { WebToonDB } from "../../FakeDB/WebToonDB";
+import cls from "../../utils/cls";
+import ChevronLeft from "../SVG/ChevronLeftSVG";
+import ChevronRight from "../SVG/ChevronRightSVG";
+import SHStack from "../utils/SHStack";
+import VideoGridItem from "../utils/VideoGridItem";
+import WebToonTrendingItem from "../utils/WebToonTrendItem";
 
 export default function WebToon({ category }: { category: string }) {
   const [trendingItem, setTrendingItem] = useState<string>("웹툰");

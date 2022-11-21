@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { BookDB } from "../FakeDB/BookDB";
-import { VideoDB } from "../FakeDB/VideoDB";
-import HStack from "./HStack";
-import MoreArticles from "./MoreArticles";
-import VideoGridItem from "./VideoGridItem";
+import { BookDB } from "../../FakeDB/BookDB";
+import { VideoDB } from "../../FakeDB/VideoDB";
+import HStack from "../utils/HStack";
+import MoreArticles from "../utils/Btn/MoreArticlesBtn";
+import VideoGridItem from "../utils/VideoGridItem";
 
 export default function Fashion({ category }: { category: string }) {
   const [{ pageIndex, page }, setPageIndex] = useState<{

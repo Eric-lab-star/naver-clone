@@ -1,5 +1,3 @@
-import cls from "../utils/cls";
-
 interface Idata {
   id: number;
   title: string;

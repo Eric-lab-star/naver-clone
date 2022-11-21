@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
-import MailSvg from "./MailSvg";
-import NavbarItem from "./NavBarItems";
+import MailSvg from "./SVG/MailSvg";
+import NavbarItem from "./utils/NavBarItems";
 import WeatherBanner from "./weatherBanner";
 export default function Navbar() {
   const navList = [

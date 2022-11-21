@@ -1,5 +1,5 @@
-import ChevronRight from "./ChevronRight";
-import LockSVG from "./LockSVG";
+import ChevronRight from "./SVG/ChevronRightSVG";
+import LockSVG from "./SVG/LockSVG";
 
 export default function LoginForm() {
   return (

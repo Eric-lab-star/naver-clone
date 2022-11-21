@@ -1,5 +1,5 @@
 import Link from "next/link";
-import SearchSvg from "./SearchSvg";
+import SearchSvg from "./SVG/SearchSvg";
 import NaverLogo from "../public/naverTop.png";
 import Image from "next/image";
 import React from "react";

@@ -1,5 +1,5 @@
-import { IVideo } from "../FakeDB/VideoDB";
-import { IWebtoon } from "../FakeDB/WebToonDB";
+import { IVideo } from "../../FakeDB/VideoDB";
+import { IWebtoon } from "../../FakeDB/WebToonDB";
 
 export default function VideoGridItem({
   videoData,

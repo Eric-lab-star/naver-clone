@@ -1,4 +1,4 @@
-import StarSVG from "./StarSVG";
+import StarSVG from "../SVG/StarSVG";
 
 interface IBookCoverProp {
   title: string;

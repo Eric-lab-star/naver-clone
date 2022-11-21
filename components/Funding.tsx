@@ -1,8 +1,8 @@
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
 import { FundingDB } from "../FakeDB/FundingDB";
 import cls from "../utils/cls";
-import ChevronLeft from "./ChevronLeft";
-import ChevronRight from "./ChevronRight";
+import ChevronLeft from "./SVG/ChevronLeftSVG";
+import ChevronRight from "./SVG/ChevronRightSVG";
 
 interface FundingProps {
   isFirst: boolean;

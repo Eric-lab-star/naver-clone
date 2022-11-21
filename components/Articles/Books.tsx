@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { BookDB } from "../FakeDB/BookDB";
-import BookCover from "./BookCover";
-import ChevronLeft from "./ChevronLeft";
-import ChevronRight from "./ChevronRight";
-import HStack from "./HStack";
-import StarSVG from "./StarSVG";
+import { BookDB } from "../../FakeDB/BookDB";
+import BookCover from "../utils/BookCover";
+import ChevronLeft from "../SVG/ChevronLeftSVG";
+import ChevronRight from "../SVG/ChevronRightSVG";
+import HStack from "../utils/HStack";
 
 export default function Books({ category }: { category: string }) {
   const [page, setPage] = useState<number>(0);

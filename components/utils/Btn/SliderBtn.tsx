@@ -1,6 +1,6 @@
-import cls from "../utils/cls";
-import ChevronLeft from "./ChevronLeft";
-import ChevronRight from "./ChevronRight";
+import cls from "../../../utils/cls";
+import ChevronLeft from "../../SVG/ChevronLeftSVG";
+import ChevronRight from "../../SVG/ChevronRightSVG";
 
 export default function SliderBtn({ className }: { className: string }) {
   return (

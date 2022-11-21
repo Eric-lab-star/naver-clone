@@ -1,4 +1,4 @@
-import { IWebtoon } from "../FakeDB/WebToonDB";
+import { IWebtoon } from "../../FakeDB/WebToonDB";
 
 export default function WebToonTrendingItem({ data }: { data: IWebtoon }) {
   return (

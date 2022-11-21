@@ -1,8 +1,8 @@
-import CalendarDays from "./CalendarDays";
-import ChevronRight from "./ChevronRight";
-import CogSVG from "./Cog";
-import Grid from "./Grid";
-import ListSVG from "./ListSVG";
+import CalendarDays from "../../SVG/CalendarDaysSVG";
+import ChevronRight from "../../SVG/ChevronRightSVG";
+import CogSVG from "../../SVG/CogSVG";
+import Grid from "../../SVG/GridSVG";
+import ListSVG from "../../SVG/ListSVG";
 
 export default function NewsBtn() {
   return (
