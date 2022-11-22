@@ -1,9 +1,9 @@
-import Advertise from "./Advertise";
-import NewsHeadLine from "./NewsHeadLine";
-import News from "./News";
-import Article from "./Article";
-import LoginForm from "./LoginForm";
-import TrendShopping from "./TrendShopping";
+import Advertise from "./contents/Advertise";
+import NewsHeadLine from "./contents/NewsHeadLine";
+import News from "./contents/News";
+import Article from "./contents/ArticleWrapper";
+import LoginSection from "./contents/LoginBox";
+import TrendShopping from "./contents/TrendShopping";
 
 export default function Body() {
   return (
@@ -16,7 +16,7 @@ export default function Body() {
           <Article />
         </div>
         <div className="min-h-screen w-[348px] space-y-5 ">
-          <LoginForm />
+          <LoginSection />
           <div className="h-[50px] w-full border flex text-sm p-4 items-center">
             <div>증시</div>
             <div>코스피</div>

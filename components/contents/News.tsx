@@ -1,17 +1,17 @@
 import { MouseEvent, useEffect, useState } from "react";
-import cls from "../utils/cls";
-import SliderBtn from "./utils/Btn/SliderBtn";
-import MBCJSON from "../FakeDB/MBCTop.json";
-import SBSJSON from "../FakeDB/SBSTop.json";
-import KBSJSON from "../FakeDB/KBSTop.json";
-import WSJJSON from "../FakeDB/wsjTop.json";
-import JTBCJSON from "../FakeDB/JTBCTop.json";
-import YTNJSON from "../FakeDB/YTNTop.json";
+import cls from "../../utils/cls";
+import SliderBtn from "../utils/Btn/SliderBtn";
+import MBCJSON from "../../FakeDB/MBCTop.json";
+import SBSJSON from "../../FakeDB/SBSTop.json";
+import KBSJSON from "../../FakeDB/KBSTop.json";
+import WSJJSON from "../../FakeDB/wsjTop.json";
+import JTBCJSON from "../../FakeDB/JTBCTop.json";
+import YTNJSON from "../../FakeDB/YTNTop.json";
 import useSWR from "swr";
-import NewsBtn from "./utils/Btn/NewsBtn";
+import NewsBtn from "../utils/Btn/NewsBtn";
 import Image from "next/image";
 import Link from "next/link";
-import { ScrapeType, StaticType } from "../types/newsTypes";
+import { ScrapeType, StaticType } from "../../types/newsTypes";
 
 export default function News() {
   const [news, setNews] = useState<string>("KBS");

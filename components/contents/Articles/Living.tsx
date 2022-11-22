@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { LivingDB } from "../../FakeDB/LivingDB";
-import Funding from "../Funding";
-import HStack from "../utils/HStack";
-import MoreArticles from "../utils/Btn/MoreArticlesBtn";
+import { LivingDB } from "../../../FakeDB/LivingDB";
+import Funding from "../../Funding";
+import HStack from "../../utils/HStack";
+import MoreArticles from "../../utils/Btn/MoreArticlesBtn";
 
 export default function Living({ category }: { category: string }) {
   const [page, setPage] = useState<number[]>([0]);

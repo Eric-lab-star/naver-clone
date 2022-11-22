@@ -1,10 +1,10 @@
-import SliderBtn from "./utils/Btn/SliderBtn";
+import SliderBtn from "../utils/Btn/SliderBtn";
 import { MouseEvent, useState } from "react";
-import CategoryBar from "./utils/CategoryBar";
+import CategoryBar from "../utils/CategoryBar";
 import Economy from "./Articles/Economy";
 import Books from "./Articles/Books";
 import Living from "./Articles/Living";
-import SectionHeader from "./SectionHeader";
+import SectionHeader from "../SectionHeader";
 import Cars from "./Articles/Cars";
 import WebToon from "./Articles/WebToon";
 import Fashion from "./Articles/Fashion";

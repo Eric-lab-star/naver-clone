@@ -1,6 +1,6 @@
-import ChevronLeft from "./SVG/ChevronLeftSVG";
-import ChevronRight from "./SVG/ChevronRightSVG";
-import PlusSVG from "./SVG/PlusSVG";
+import ChevronLeft from "../SVG/ChevronLeftSVG";
+import ChevronRight from "../SVG/ChevronRightSVG";
+import PlusSVG from "../SVG/PlusSVG";
 
 export default function TrendShopping() {
   return (
@@ -23,32 +23,30 @@ export default function TrendShopping() {
       </div>
       <div className="h-[70px] text-[13px] p-3 flex flex-col justify-center bg-slate-100 mt-3 border">
         <div className="space-x-[0.7rem] flex items-center">
-          <span className="hover:cursor-pointer hover:underline">쿠팡</span>
-          <span className="w-1 h-1 rounded-full bg-slate-300 inline-block"></span>
-          <span className="hover:cursor-pointer hover:underline">옥션</span>
-          <span className="w-1 h-1 rounded-full bg-slate-300 inline-block"></span>
-          <span className="hover:cursor-pointer hover:underline">11번가</span>
-          <span className="w-1 h-1 rounded-full bg-slate-300 inline-block"></span>
-          <span className="hover:cursor-pointer hover:underline">G마켓</span>
-          <span className="w-1 h-1 rounded-full bg-slate-300 inline-block"></span>
-          <span className="hover:cursor-pointer hover:underline">SSG닷컴</span>
-          <span className="w-1 h-1 rounded-full bg-slate-300 inline-block"></span>
-          <span className="hover:cursor-pointer hover:underline">티몬</span>
+          {["쿠팡", "옥션", "11번가", "G마켓", "SSG닷컴", "티몬"].map((v) => {
+            return (
+              <div key={v}>
+                <span className="hover:cursor-pointer hover:underline">
+                  {v}
+                </span>
+                <span className="w-1 h-1 rounded-full bg-slate-300 inline-block"></span>
+              </div>
+            );
+          })}
         </div>
         <div className="space-x-2 flex items-center">
-          <span className="hover:cursor-pointer hover:underline">올리브영</span>
-          <span className="w-1 h-1 rounded-full bg-slate-300 inline-block"></span>
-          <span className="hover:cursor-pointer hover:underline">위메프</span>
-          <span className="w-1 h-1 rounded-full bg-slate-300 inline-block"></span>
-          <span className="hover:cursor-pointer hover:underline">GS샵</span>
-          <span className="w-1 h-1 rounded-full bg-slate-300 inline-block"></span>
-          <span className="hover:cursor-pointer hover:underline">
-            CJ온스타일
-          </span>
-          <span className="w-1 h-1 rounded-full bg-slate-300 inline-block"></span>
-          <span className="hover:cursor-pointer hover:underline">
-            패션플러스
-          </span>
+          {["올리브영", "위메프", "GS샵", "CJ온스타일", "패션플러스"].map(
+            (v) => {
+              return (
+                <div key={v}>
+                  <span className="hover:cursor-pointer hover:underline">
+                    {v}
+                  </span>
+                  <span className="w-1 h-1 rounded-full bg-slate-300 inline-block"></span>
+                </div>
+              );
+            }
+          )}
         </div>
       </div>
       <div className="border-x border-b flex flex-col justify-center items-center">

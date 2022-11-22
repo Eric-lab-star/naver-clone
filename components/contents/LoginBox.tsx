@@ -1,7 +1,7 @@
-import ChevronRight from "./SVG/ChevronRightSVG";
-import LockSVG from "./SVG/LockSVG";
+import ChevronRight from "../SVG/ChevronRightSVG";
+import LockSVG from "../SVG/LockSVG";
 
-export default function LoginForm() {
+export default function LoginSection() {
   return (
     <div className=" h-[130px] bg-slate-100">
       <div className="h-[90px] border-x border-t flex justify-evenly items-center ">
