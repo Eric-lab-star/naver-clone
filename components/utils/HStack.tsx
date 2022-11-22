@@ -24,7 +24,10 @@ export default function HStack({
       <div className="flex space-x-4">
         <div className="w-[170px] h-[114px] bg-slate-200 flex-none"></div>
         <div className="text-sm">
-          <div className={`${categoryColor} text-[12.5px] font-semibold`}>
+          <div
+            style={{ color: `${categoryColor}` }}
+            className={`text-[12.5px] font-semibold`}
+          >
             {category}
           </div>
           <div className="hover:underline font-bold text-sm">{title}</div>

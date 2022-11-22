@@ -10,7 +10,7 @@ const NavBarItem = function NavbarItem({
   index: number;
 }) {
   return (
-    <Link href={`/${value}`} legacyBehavior>
+    <Link href={`/`} legacyBehavior>
       <a
         className={cls(
           "font-bold",

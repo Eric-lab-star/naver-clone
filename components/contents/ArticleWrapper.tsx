@@ -1,5 +1,4 @@
-import SliderBtn from "../utils/Btn/SliderBtn";
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useMemo, useState } from "react";
 import CategoryBar from "../utils/CategoryBar";
 import Economy from "./Articles/Economy";
 import Books from "./Articles/Books";
@@ -8,13 +7,28 @@ import SectionHeader from "../SectionHeader";
 import Cars from "./Articles/Cars";
 import WebToon from "./Articles/WebToon";
 import Fashion from "./Articles/Fashion";
+import ChevronLeft from "../SVG/ChevronLeftSVG";
+import ChevronRight from "../SVG/ChevronRightSVG";
+import { CategoryDB } from "../../FakeDB/CategoryDB";
 export default function Article() {
-  const [category, setCategory] = useState<string>("웹툰");
+  const [page, setPage] = useState(0);
   const onClick = (event: MouseEvent<HTMLDivElement>) => {
-    const target = event.currentTarget;
-    setCategory(() => target.innerHTML);
+    const text = event.currentTarget.innerHTML;
+    const index = CategoryDB.findIndex((v, i, a) => {
+      return a[i].name === text;
+    });
+    setPage(index);
   };
-
+  const { name, color } = CategoryDB[page];
+  const handlePage = (direction: number) => {
+    if (direction === -1 && page === 0) {
+      return;
+    }
+    if (direction === 1 && page === CategoryDB.length - 1) {
+      return;
+    }
+    setPage((prev) => (prev = prev + direction));
+  };
   return (
     <div className="mt-9 space-y-3 ">
       <SectionHeader
@@ -22,15 +36,28 @@ export default function Article() {
         desc="주제별로 분류된 다양한 글 모음"
       />
       <div className="relative">
-        <CategoryBar onClick={onClick} category={category} />
-        <SliderBtn className="top-[10px]" />
+        <CategoryBar onClick={onClick} category={name} />
+        <div
+          onClick={() => handlePage(-1)}
+          id="left"
+          className="top-[10px] w-[30px] hover:cursor-pointer absolute -left-5 aspect-square rounded-full shadow-slate-300 shadow-md bg-white flex justify-center items-center"
+        >
+          <ChevronLeft className="text-slate-700 w-4" />
+        </div>
+        <div
+          onClick={() => handlePage(1)}
+          id="right"
+          className="top-[10px] w-[30px] hover:cursor-pointer absolute  -right-5 aspect-square rounded-full shadow-slate-300 shadow-md bg-white flex justify-center items-center"
+        >
+          <ChevronRight className="text-slate-700 w-4" />
+        </div>
       </div>
-      {category === "리빙" ? <Living category={category} /> : null}
-      {category === "책방" ? <Books category={category} /> : null}
-      {category === "경제" ? <Economy category={category} /> : null}
-      {category === "자동차" ? <Cars category={category} /> : null}
-      {category === "웹툰" ? <WebToon category={category} /> : null}
-      {category === "패션뷰티" ? <Fashion category={category} /> : null}
+      {name === "리빙" ? <Living name={name} color={color} /> : null}
+      {name === "책방" ? <Books name={name} color={color} /> : null}
+      {name === "경제" ? <Economy name={name} color={color} /> : null}
+      {name === "자동차" ? <Cars name={name} color={color} /> : null}
+      {name === "웹툰" ? <WebToon name={name} color={color} /> : null}
+      {name === "패션뷰티" ? <Fashion name={name} color={color} /> : null}
     </div>
   );
 }

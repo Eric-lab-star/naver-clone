@@ -4,8 +4,9 @@ import BookCover from "../../utils/BookCover";
 import ChevronLeft from "../../SVG/ChevronLeftSVG";
 import ChevronRight from "../../SVG/ChevronRightSVG";
 import HStack from "../../utils/HStack";
+import { ICategory } from "../../../types/categoryTypes";
 
-export default function Books({ category }: { category: string }) {
+export default function Books({ name, color }: ICategory) {
   const [page, setPage] = useState<number>(0);
 
   const onClick = (direction: number) => {
@@ -22,12 +23,7 @@ export default function Books({ category }: { category: string }) {
     <div className="flex space-y-4 flex-col pb-16">
       {/* 책 소개 */}
       {BookDB.slice(1, 5).map((data) => (
-        <HStack
-          categoryColor="text-green-500"
-          {...data}
-          category={category}
-          key={data.id}
-        />
+        <HStack categoryColor={color} {...data} category={name} key={data.id} />
       ))}
       <div className="border-y pb-16 pt-6">
         {/* 제목 */}
@@ -78,12 +74,7 @@ export default function Books({ category }: { category: string }) {
       </div>
       {/* 책 소개 */}
       {BookDB.slice(5, 10).map((data) => (
-        <HStack
-          categoryColor="text-green-500"
-          {...data}
-          category={category}
-          key={data.id}
-        />
+        <HStack categoryColor={color} {...data} category={name} key={data.id} />
       ))}
     </div>
   );

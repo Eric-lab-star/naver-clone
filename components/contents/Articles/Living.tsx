@@ -3,8 +3,9 @@ import { LivingDB } from "../../../FakeDB/LivingDB";
 import Funding from "../../Funding";
 import HStack from "../../utils/HStack";
 import MoreArticles from "../../utils/Btn/MoreArticlesBtn";
+import { ICategory } from "../../../types/categoryTypes";
 
-export default function Living({ category }: { category: string }) {
+export default function Living({ name, color }: ICategory) {
   const [page, setPage] = useState<number[]>([0]);
 
   const onClick = () => {
@@ -22,9 +23,9 @@ export default function Living({ category }: { category: string }) {
               (data, index) => {
                 return (
                   <HStack
-                    categoryColor="text-amber-800"
+                    categoryColor={color}
                     {...data}
-                    category={category}
+                    category={name}
                     key={data.id}
                     className={
                       index === 3 ? "border-b border-slate-200 pb-4" : ""

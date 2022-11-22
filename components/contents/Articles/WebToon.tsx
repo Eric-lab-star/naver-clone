@@ -1,6 +1,7 @@
 import { MouseEvent, useState } from "react";
 import { VideoDB } from "../../../FakeDB/VideoDB";
 import { WebToonDB } from "../../../FakeDB/WebToonDB";
+import { ICategory } from "../../../types/categoryTypes";
 import cls from "../../../utils/cls";
 import ChevronLeft from "../../SVG/ChevronLeftSVG";
 import ChevronRight from "../../SVG/ChevronRightSVG";
@@ -8,7 +9,7 @@ import SHStack from "../../utils/SHStack";
 import VideoGridItem from "../../utils/VideoGridItem";
 import WebToonTrendingItem from "../../utils/WebToonTrendItem";
 
-export default function WebToon({ category }: { category: string }) {
+export default function WebToon({ name, color }: ICategory) {
   const [trendingItem, setTrendingItem] = useState<string>("웹툰");
   const [sliderPage, setSliderPage] = useState<number>(1);
   const [novelPage, setNovelPage] = useState<number>(0);
@@ -41,7 +42,7 @@ export default function WebToon({ category }: { category: string }) {
         <div className="w-[366px] space-y-2">
           <div className=" bg-slate-100 border h-[180px]"></div>
           <div className="text-[12.5px] space-y-1">
-            <div className="text-green-500  font-bold">{category}</div>
+            <div className="text-green-500  font-bold">{name}</div>
             <div className="text-slate-800 font-bold ">
               신작 &lt;고교흥신소&gt;1화 보러가기
             </div>
@@ -55,8 +56,8 @@ export default function WebToon({ category }: { category: string }) {
               key={v}
               title="너 피어싱 빼지 않았었나?"
               author="요일별 웹툰"
-              category={category}
-              categoryColor="text-green-500"
+              category={name}
+              categoryColor={color}
               className="hover:cursor-pointer"
             />
           ))}

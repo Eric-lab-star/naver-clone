@@ -4,8 +4,9 @@ import { VideoDB } from "../../../FakeDB/VideoDB";
 import HStack from "../../utils/HStack";
 import MoreArticles from "../../utils/Btn/MoreArticlesBtn";
 import VideoGridItem from "../../utils/VideoGridItem";
+import { ICategory } from "../../../types/categoryTypes";
 
-export default function Economy({ category }: { category: string }) {
+export default function Economy({ name, color }: ICategory) {
   const [{ pageIndex, page }, setPageIndex] = useState<{
     pageIndex: number;
     page: number[];
@@ -27,9 +28,9 @@ export default function Economy({ category }: { category: string }) {
           {BookDB.slice(v * 8, v * 8 + 4).map((data) => (
             <HStack
               className="hover:cursor-pointer"
-              categoryColor="text-green-500"
+              categoryColor={color}
               {...data}
-              category={category}
+              category={name}
               key={data.id}
             />
           ))}
@@ -41,9 +42,9 @@ export default function Economy({ category }: { category: string }) {
           {BookDB.slice(v * 8 + 4, v * 8 + 8).map((data) => (
             <HStack
               className="hover:cursor-pointer"
-              categoryColor="text-green-500"
+              categoryColor={color}
               {...data}
-              category={category}
+              category={name}
               key={data.id}
             />
           ))}

@@ -8,8 +8,9 @@ import HStack from "../../utils/HStack";
 import MoreArticles from "../../utils/Btn/MoreArticlesBtn";
 import SHStack from "../../utils/SHStack";
 import VideoGridItem from "../../utils/VideoGridItem";
+import { ICategory } from "../../../types/categoryTypes";
 
-export default function Cars({ category }: { category: string }) {
+export default function Cars({ name, color }: ICategory) {
   const [{ pageIndex, page }, setPageIndex] = useState<{
     pageIndex: number;
     page: number[];
@@ -68,9 +69,9 @@ export default function Cars({ category }: { category: string }) {
         <div key={index} className="flex space-y-4 flex-col">
           {BookDB.slice(v * 5, v * 5 + 5).map((data) => (
             <HStack
-              categoryColor="text-blue-500"
+              categoryColor={color}
               {...data}
-              category={category}
+              category={name}
               key={data.id}
               className="hover:cursor-pointer"
             />
