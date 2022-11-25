@@ -1,7 +1,7 @@
 import Advertise from "./contents/Advertise";
 import NewsHeadLine from "./contents/NewsHeadLine";
 import News from "./contents/News";
-import Article from "./contents/ArticleWrapper";
+import ArticleWrapper from "./contents/ArticleWrapper";
 import LoginSection from "./contents/LoginBox";
 import TrendShopping from "./contents/TrendShopping";
 
@@ -13,7 +13,7 @@ export default function Body() {
           <Advertise />
           <NewsHeadLine />
           <News />
-          <Article />
+          <ArticleWrapper />
         </div>
         <div className="min-h-screen w-[348px] space-y-5 ">
           <LoginSection />

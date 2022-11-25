@@ -1,6 +1,8 @@
 import { MouseEvent, useState } from "react";
+import useSWR from "swr";
 import { VideoDB } from "../../../FakeDB/VideoDB";
 import { WebToonDB } from "../../../FakeDB/WebToonDB";
+import { IMarvelComic } from "../../../pages/api/marvel";
 import { ICategory } from "../../../types/categoryTypes";
 import cls from "../../../utils/cls";
 import ChevronLeft from "../../SVG/ChevronLeftSVG";
@@ -13,6 +15,8 @@ export default function WebToon({ name, color }: ICategory) {
   const [trendingItem, setTrendingItem] = useState<string>("웹툰");
   const [sliderPage, setSliderPage] = useState<number>(1);
   const [novelPage, setNovelPage] = useState<number>(0);
+  const { data: Comic } = useSWR<IMarvelComic>("/api/marvel");
+
   const onSliderBtnClick = (direction: number) => {
     if (direction === -1 && sliderPage === 0) {
       return;

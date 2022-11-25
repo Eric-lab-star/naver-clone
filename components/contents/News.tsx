@@ -18,12 +18,12 @@ export default function News() {
   const [page, setPage] = useState<number>(0);
   const [DB, setDB] = useState<ScrapeType>();
   const [StaticDB, setStaticDB] = useState<StaticType>(MBCJSON);
-  const { data: MBCDB } = useSWR<ScrapeType>("/api/mbcScrapper");
-  const { data: SBSDB } = useSWR<ScrapeType>("/api/sbsScrapper");
-  const { data: KBSDB } = useSWR<ScrapeType>("/api/kbsScrapper");
-  const { data: WSJDB } = useSWR<ScrapeType>("/api/wsjScrapper");
-  const { data: JTBCDB } = useSWR<ScrapeType>("/api/jtbcScraper");
-  const { data: YTNDB } = useSWR<ScrapeType>("/api/ytnScraper");
+  // const { data: MBCDB } = useSWR<ScrapeType>("/api/mbcScrapper");
+  // const { data: SBSDB } = useSWR<ScrapeType>("/api/sbsScrapper");
+  // const { data: KBSDB } = useSWR<ScrapeType>("/api/kbsScrapper");
+  // const { data: WSJDB } = useSWR<ScrapeType>("/api/wsjScrapper");
+  // const { data: JTBCDB } = useSWR<ScrapeType>("/api/jtbcScraper");
+  // const { data: YTNDB } = useSWR<ScrapeType>("/api/ytnScraper");
 
   const clickNews = (event: MouseEvent<HTMLDivElement>) => {
     const text = event.currentTarget.innerHTML;
@@ -50,31 +50,31 @@ export default function News() {
     setStaticDB(StaticDB);
   }
 
-  useEffect(() => {
-    switch (newsList[page]) {
-      case "MBC":
-        switchDB(MBCDB, MBCJSON);
-        break;
-      case "SBS":
-        switchDB(SBSDB, SBSJSON);
-        break;
-      case "KBS":
-        switchDB(KBSDB, KBSJSON);
-        break;
-      case "WSJ":
-        switchDB(WSJDB, WSJJSON);
-        break;
-      case "YTN":
-        switchDB(YTNDB, YTNJSON);
-        break;
-      case "JTBC":
-        switchDB(JTBCDB, JTBCJSON);
-        break;
-      default:
-        switchDB(MBCDB, MBCJSON);
-        break;
-    }
-  }, [page, MBCDB, SBSDB, KBSDB, WSJDB, JTBCDB, YTNDB, newsList]);
+  // useEffect(() => {
+  //   switch (newsList[page]) {
+  //     case "MBC":
+  //       switchDB(MBCDB, MBCJSON);
+  //       break;
+  //     case "SBS":
+  //       switchDB(SBSDB, SBSJSON);
+  //       break;
+  //     case "KBS":
+  //       switchDB(KBSDB, KBSJSON);
+  //       break;
+  //     case "WSJ":
+  //       switchDB(WSJDB, WSJJSON);
+  //       break;
+  //     case "YTN":
+  //       switchDB(YTNDB, YTNJSON);
+  //       break;
+  //     case "JTBC":
+  //       switchDB(JTBCDB, JTBCJSON);
+  //       break;
+  //     default:
+  //       switchDB(MBCDB, MBCJSON);
+  //       break;
+  //   }
+  // }, [page, MBCDB, SBSDB, KBSDB, WSJDB, JTBCDB, YTNDB, newsList]);
   return (
     <div>
       {/* 뉴스 버튼*/}

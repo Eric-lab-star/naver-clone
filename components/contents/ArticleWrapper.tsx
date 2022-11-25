@@ -10,7 +10,7 @@ import Fashion from "./Articles/Fashion";
 import ChevronLeft from "../SVG/ChevronLeftSVG";
 import ChevronRight from "../SVG/ChevronRightSVG";
 import { CategoryDB } from "../../FakeDB/CategoryDB";
-export default function Article() {
+export default function ArticleWrapper() {
   const [page, setPage] = useState(0);
   const onClick = (event: MouseEvent<HTMLDivElement>) => {
     const text = event.currentTarget.innerHTML;
@@ -35,6 +35,7 @@ export default function Article() {
         title="오늘 읽을만한 글"
         desc="주제별로 분류된 다양한 글 모음"
       />
+      {/* sliderbtn */}
       <div className="relative">
         <CategoryBar onClick={onClick} category={name} />
         <div
@@ -52,6 +53,7 @@ export default function Article() {
           <ChevronRight className="text-slate-700 w-4" />
         </div>
       </div>
+      {/* articles */}
       {name === "리빙" ? <Living name={name} color={color} /> : null}
       {name === "책방" ? <Books name={name} color={color} /> : null}
       {name === "경제" ? <Economy name={name} color={color} /> : null}
