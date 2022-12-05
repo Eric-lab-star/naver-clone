@@ -1,24 +1,23 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
-import { ScrapeType, StaticType } from "../../types/newsTypes";
+import { ScrapeType } from "../../types/newsTypes";
 import ChevronLeft from "../SVG/ChevronRightSVG";
 import YTNJSON from "../../FakeDB/YTNTop.json";
 import Head from "next/head";
 
-export default function NewsHeadLine(props: any) {
-  console.log(props);
+export default function NewsHeadLine() {
   const { data: DB } = useSWR<ScrapeType>("/api/ytnScraper");
   const [index, setIndex] = useState(0);
-  // useEffect(() => {
-  //   const timerId = setInterval(() => {
-  //     if (index >= 6) {
-  //       setIndex((prev) => (prev = 0));
-  //     }
-  //     setIndex((prev) => (prev = prev + 1));
-  //   }, 3000);
-  //   return () => clearInterval(timerId);
-  // }, [index]);
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      if (index >= 6) {
+        setIndex((prev) => (prev = 0));
+      }
+      setIndex((prev) => (prev = prev + 1));
+    }, 3000);
+    return () => clearInterval(timerId);
+  }, [index]);
 
   return (
     <div className="bg-slate-100 px-3 flex items-center justify-between border border-slate-300">
@@ -60,11 +59,4 @@ export default function NewsHeadLine(props: any) {
       </div>
     </div>
   );
-}
-
-export async function getServerSideProps() {
-  console.log("serverside");
-  return {
-    props: { name: "serverprop" },
-  };
 }
