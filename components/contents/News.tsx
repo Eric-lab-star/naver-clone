@@ -6,25 +6,17 @@ import KBSJSON from "../../FakeDB/KBSTop.json";
 import WSJJSON from "../../FakeDB/wsjTop.json";
 import JTBCJSON from "../../FakeDB/JTBCTop.json";
 import YTNJSON from "../../FakeDB/YTNTop.json";
-import useSWR from "swr";
+
 import NewsBtn from "../utils/Btn/NewsBtn";
 import Image from "next/image";
 import Link from "next/link";
-import { ScrapeType, StaticType } from "../../types/newsTypes";
+import { StaticType } from "../../types/newsTypes";
 import ChevronLeft from "../SVG/ChevronLeftSVG";
 import ChevronRight from "../SVG/ChevronRightSVG";
 
 export default function News() {
   const [page, setPage] = useState<number>(0);
-  const [DB, setDB] = useState<ScrapeType>();
   const [StaticDB, setStaticDB] = useState<StaticType>(MBCJSON);
-  // const { data: MBCDB } = useSWR<ScrapeType>("/api/mbcScrapper");
-  // const { data: SBSDB } = useSWR<ScrapeType>("/api/sbsScrapper");
-  // const { data: KBSDB } = useSWR<ScrapeType>("/api/kbsScrapper");
-  // const { data: WSJDB } = useSWR<ScrapeType>("/api/wsjScrapper");
-  // const { data: JTBCDB } = useSWR<ScrapeType>("/api/jtbcScraper");
-  // const { data: YTNDB } = useSWR<ScrapeType>("/api/ytnScraper");
-
   const clickNews = (event: MouseEvent<HTMLDivElement>) => {
     const text = event.currentTarget.innerHTML;
     const index = newsList.findIndex((v, i, a) => {
@@ -45,36 +37,32 @@ export default function News() {
     () => ["MBC", "SBS", "KBS", "WSJ", "JTBC", "YTN"],
     []
   );
-  function switchDB(DB: ScrapeType | undefined, StaticDB: StaticType) {
-    setDB(DB);
-    setStaticDB(StaticDB);
-  }
 
-  // useEffect(() => {
-  //   switch (newsList[page]) {
-  //     case "MBC":
-  //       switchDB(MBCDB, MBCJSON);
-  //       break;
-  //     case "SBS":
-  //       switchDB(SBSDB, SBSJSON);
-  //       break;
-  //     case "KBS":
-  //       switchDB(KBSDB, KBSJSON);
-  //       break;
-  //     case "WSJ":
-  //       switchDB(WSJDB, WSJJSON);
-  //       break;
-  //     case "YTN":
-  //       switchDB(YTNDB, YTNJSON);
-  //       break;
-  //     case "JTBC":
-  //       switchDB(JTBCDB, JTBCJSON);
-  //       break;
-  //     default:
-  //       switchDB(MBCDB, MBCJSON);
-  //       break;
-  //   }
-  // }, [page, MBCDB, SBSDB, KBSDB, WSJDB, JTBCDB, YTNDB, newsList]);
+  useEffect(() => {
+    switch (newsList[page]) {
+      case "MBC":
+        setStaticDB(MBCJSON);
+        break;
+      case "SBS":
+        setStaticDB(SBSJSON);
+        break;
+      case "KBS":
+        setStaticDB(KBSJSON);
+        break;
+      case "WSJ":
+        setStaticDB(WSJJSON);
+        break;
+      case "YTN":
+        setStaticDB(YTNJSON);
+        break;
+      case "JTBC":
+        setStaticDB(JTBCJSON);
+        break;
+      default:
+        setStaticDB(MBCJSON);
+        break;
+    }
+  }, [page, newsList]);
   return (
     <div>
       {/* 뉴스 버튼*/}
@@ -106,33 +94,13 @@ export default function News() {
                 {newsList[page]}
               </span>
               <span className="text-slate-500 text-[12px] ">
-                {DB?.time
-                  ? `${DB.time.year}.${DB.time.month + 1}.${DB.time.date}. ${
-                      DB.time.hours
-                    }:${DB.time.min} 편집`
-                  : `${StaticDB.time.year}.${StaticDB.time.month + 1}.${
-                      StaticDB.time.date
-                    }. ${StaticDB.time.hours}:${StaticDB.time.min} 편집`}
+                {`${StaticDB.time.year}.${StaticDB.time.month + 1}.${
+                  StaticDB.time.date
+                }. ${StaticDB.time.hours}:${StaticDB.time.min} 편집`}
               </span>
             </div>
             <div className="flex space-x-6">
-              {DB?.data ? (
-                <Link href={DB.data[0].href + ""}>
-                  <div className="w-[195px] space-y-3 hover:cursor-pointer ">
-                    <div className="relative h-[132px] w-[195px]">
-                      <Image
-                        src={DB.data[0].imgSrc || ""}
-                        className=" bg-slate-200 h-[132px] w-[195px]"
-                        alt={`${DB.data[0].title}`}
-                        layout="fill"
-                      />
-                    </div>
-                    <div className="font-bold text-[13px] hover:underline">
-                      {DB.data[0].title}
-                    </div>
-                  </div>
-                </Link>
-              ) : (
+              {
                 <Link href={StaticDB.data[0].href || ""}>
                   <div className="w-[195px] space-y-3 hover:cursor-pointer ">
                     <div className="relative h-[132px] w-[195px]">
@@ -148,28 +116,18 @@ export default function News() {
                     </div>
                   </div>
                 </Link>
-              )}
+              }
               <div className="overflow-hidden ">
                 <div className="text-[13px] space-y-[0.4em] flex flex-col">
-                  {DB?.ok
-                    ? DB?.data?.slice(1).map((article, index) => (
-                        <a
-                          href={article.href || ""}
-                          key={article.id}
-                          className="truncate hover:cursor-pointer hover:underline"
-                        >
-                          {article.title}
-                        </a>
-                      ))
-                    : StaticDB.data.slice(1).map((article) => (
-                        <a
-                          href={article.href || ""}
-                          key={article.id}
-                          className="truncate hover:cursor-pointer hover:underline"
-                        >
-                          {article.title}
-                        </a>
-                      ))}
+                  {StaticDB.data.slice(1).map((article) => (
+                    <a
+                      href={article.href || ""}
+                      key={article.id}
+                      className="truncate hover:cursor-pointer hover:underline"
+                    >
+                      {article.title}
+                    </a>
+                  ))}
                 </div>
                 <div className="text-slate-400 text-xs mt-5">
                   {newsList[page]} 언론사에서 직접 편집한 뉴스입니다.

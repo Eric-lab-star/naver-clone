@@ -1,15 +1,18 @@
 import { MouseEvent, useMemo, useState } from "react";
 import CategoryBar from "../utils/CategoryBar";
-import Economy from "./Articles/Economy";
-import Books from "./Articles/Books";
-import Living from "./Articles/Living";
 import SectionHeader from "../SectionHeader";
-import Cars from "./Articles/Cars";
-import WebToon from "./Articles/WebToon";
-import Fashion from "./Articles/Fashion";
 import ChevronLeft from "../SVG/ChevronLeftSVG";
 import ChevronRight from "../SVG/ChevronRightSVG";
 import { CategoryDB } from "../../FakeDB/CategoryDB";
+
+import dynamic from "next/dynamic";
+
+const WebToon = dynamic(() => import("./Articles/WebToon"));
+const Cars = dynamic(() => import("./Articles/Cars"));
+const Fashion = dynamic(() => import("./Articles/Fashion"));
+const Living = dynamic(() => import("./Articles/Living"));
+const Books = dynamic(() => import("./Articles/Books"));
+const Economy = dynamic(() => import("./Articles/Economy"));
 export default function ArticleWrapper() {
   const [page, setPage] = useState(0);
   const onClick = (event: MouseEvent<HTMLDivElement>) => {
