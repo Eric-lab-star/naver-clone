@@ -12,6 +12,7 @@ const NavBarItem = function NavbarItem({
   return (
     <Link href={`/`} legacyBehavior>
       <a
+        title={value}
         className={cls(
           "font-bold",
           index <= 7 ? "text-green-500" : "text-slate-800"

@@ -13,15 +13,19 @@ function SearchBar() {
             <Image alt="naver" src={NaverLogo} height={54} width={215} />
           </a>
         </Link>
-        <div className="flex h-[57px]">
+        <form className="flex h-[57px]">
           <input
+            aria-label="search"
             className="border-green-500 border-2 focus:border-green-500 focus:ring-0 w-[526px] font-bold text-lg"
             type={"text"}
           />
-          <button className="bg-green-500 w-[57px] flex justify-center items-center">
+          <button
+            title="search"
+            className="bg-green-500 w-[57px] flex justify-center items-center"
+          >
             <SearchSvg />
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );
