@@ -104,12 +104,16 @@ export default function News() {
                 <Link href={StaticDB.data[0].href || ""}>
                   <div className="w-[195px] space-y-3 hover:cursor-pointer ">
                     <div className="relative h-[132px] w-[195px]">
-                      <Image
-                        src={StaticDB.data[0].imgSrc || ""}
-                        className=" bg-slate-200 h-[132px] w-[195px]"
-                        alt={`${StaticDB.data[0].title}`}
-                        layout="fill"
-                      />
+                      {StaticDB.data[0].imgSrc ? (
+                        <Image
+                          src={StaticDB.data[0].imgSrc}
+                          className=" bg-slate-200 h-[132px] w-[195px]"
+                          alt={`${StaticDB.data[0].title}`}
+                          layout="fill"
+                        />
+                      ) : (
+                        <div className="bg-slate-200 h-[132px] w-[195px]" />
+                      )}
                     </div>
                     <div className="font-bold text-[13px] hover:underline">
                       {StaticDB.data[0].title}

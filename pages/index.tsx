@@ -5,6 +5,7 @@ import Contents from "../components/Contents";
 import Footer from "../components/Footer";
 import { SWRConfig } from "swr";
 import { SWRDevTools } from "swr-devtools";
+import Head from "next/head";
 
 function Home() {
   return (
@@ -17,6 +18,9 @@ function Home() {
         }}
       >
         <div>
+          <Head>
+            <title>Naver Clone</title>
+          </Head>
           <SearchBar />
           <Navbar />
           <Contents />
