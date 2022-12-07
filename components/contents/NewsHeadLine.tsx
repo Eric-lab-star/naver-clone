@@ -21,14 +21,6 @@ export default function NewsHeadLine() {
 
   return (
     <div className="bg-slate-100 px-3 flex items-center justify-between border border-slate-300">
-      <Head>
-        <link
-          rel="preload"
-          href="/api/ytnScraper"
-          as="fetch"
-          crossOrigin="anonymous"
-        />
-      </Head>
       <div className=" relative text-sm h-[50px] flex items-center">
         <Link href={"https://ytn.co.kr"}>
           <div className="flex items-center hover:cursor-pointer">
