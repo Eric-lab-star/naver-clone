@@ -1,16 +1,20 @@
-import { NextResponse } from "next/server";
+import { NextResponse, URLPattern, userAgent } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function middleware(request: NextRequest) {
-  // Clone the request headers and set a new header `x-hello-from-middleware1`
-  const requestHeaders = new Headers(request.headers);
-  requestHeaders.set("x-hello-from-middleware1", "hello");
+export default function middleware(request: NextRequest) {
+  console.log("I log always");
+  if (request.nextUrl.pathname.startsWith("/about")) {
+    console.log("log when about page is open");
+  }
+  const geo = request.geo;
+  const ip = request.ip;
+  const url = request.url;
+  const ua = userAgent(request);
+  const urlpath = new URLPattern({ pathname: "/about" });
+  console.log("geo", geo);
+  console.log("ip", ip);
+  console.log("url", urlpath.exec("https://localhost:3000/about"));
+  console.log("ua", ua);
 
-  const response = NextResponse.next({
-    headers: requestHeaders,
-  });
-
-  // Set a new response header `x-hello-from-middleware2`
-  response.headers.set("x-hello-from-middleware2", "hello");
-  return response;
+  return;
 }
