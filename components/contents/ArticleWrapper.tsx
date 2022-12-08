@@ -8,6 +8,19 @@ import { CategoryDB } from "../../FakeDB/CategoryDB";
 import dynamic from "next/dynamic";
 
 const WebToon = dynamic(() => import("./Articles/WebToon"));
+const Test = dynamic(
+  () =>
+    new Promise<any>((resolve) =>
+      setTimeout(
+        () =>
+          resolve(function () {
+            return <div>test</div>;
+          }),
+        3000
+      )
+    ),
+  { ssr: false, loading: () => <div>loading big component</div> }
+);
 const Cars = dynamic(() => import("./Articles/Cars"));
 const Fashion = dynamic(() => import("./Articles/Fashion"));
 const Living = dynamic(() => import("./Articles/Living"));
@@ -34,10 +47,12 @@ export default function ArticleWrapper() {
   };
   return (
     <div className="mt-9 space-y-3 ">
+      <Test />
       <SectionHeader
         title="오늘 읽을만한 글"
         desc="주제별로 분류된 다양한 글 모음"
       />
+
       {/* sliderbtn */}
       <div className="relative">
         <CategoryBar onClick={onClick} category={name} />
