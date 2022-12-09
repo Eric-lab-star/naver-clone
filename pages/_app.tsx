@@ -5,7 +5,11 @@ import { Antonio } from "@next/font/google";
 const antonio = Antonio({ subsets: ["latin"] });
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <main className={antonio.className}>
+      <Component {...pageProps} />
+    </main>
+  );
 }
 
 export default MyApp;

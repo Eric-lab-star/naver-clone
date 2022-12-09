@@ -7,7 +7,8 @@ import { SWRConfig } from "swr";
 import { SWRDevTools } from "swr-devtools";
 import Head from "next/head";
 
-function Home() {
+function Home({ posts }: { posts: any }) {
+  console.log(posts);
   return (
     <SWRDevTools>
       <SWRConfig
