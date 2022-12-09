@@ -22,9 +22,9 @@ function Home() {
             <title>Naver Clone</title>
           </Head>
           <SearchBar />
-          <Navbar />
+          {/* <Navbar />
           <Contents />
-          <Footer />
+          <Footer /> */}
         </div>
       </SWRConfig>
     </SWRDevTools>
