@@ -26,10 +26,8 @@ export default function Navbar() {
     <div className="border-y min-w-max  shadow-sm px-8 ">
       <div className="w-[1133px] relative flex items-center justify-between m-auto ">
         <div className="flex flex-nowrap space-x-3 py-[13px]">
-          <Link href={"/"}>
-            <a title="mail">
-              <MailSvg />
-            </a>
+          <Link href={"/"} title="메일">
+            <MailSvg />
           </Link>
           {navList.map((value, index) => (
             <NavbarItem key={value} value={value} index={index} />

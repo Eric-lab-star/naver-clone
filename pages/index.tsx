@@ -7,8 +7,7 @@ import { SWRConfig } from "swr";
 import { SWRDevTools } from "swr-devtools";
 import Head from "next/head";
 
-function Home({ posts }: { posts: any }) {
-  console.log(posts);
+function Home() {
   return (
     <SWRDevTools>
       <SWRConfig
@@ -23,9 +22,9 @@ function Home({ posts }: { posts: any }) {
             <title>Naver Clone</title>
           </Head>
           <SearchBar />
-          {/* <Navbar />
-          <Contents />
-          <Footer /> */}
+          <Navbar />
+          {/* <Contents />
+          <Footer />  */}
         </div>
       </SWRConfig>
     </SWRDevTools>
