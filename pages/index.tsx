@@ -1,4 +1,4 @@
-import type { NextPage } from "next";
+import type { InferGetServerSidePropsType, NextPage } from "next";
 import Navbar from "../components/Navbar";
 import SearchBar from "../components/SearchBar";
 import Contents from "../components/Contents";
@@ -7,7 +7,8 @@ import { SWRConfig } from "swr";
 import { SWRDevTools } from "swr-devtools";
 import Head from "next/head";
 
-function Home() {
+const Home: NextPage<{ product: number[] }> = ({ product }) => {
+  console.log(product);
   return (
     <SWRDevTools>
       <SWRConfig
@@ -23,12 +24,20 @@ function Home() {
           </Head>
           <SearchBar />
           <Navbar />
-          {/* <Contents />
-          <Footer />  */}
+          <Contents />
+          <Footer />
         </div>
       </SWRConfig>
     </SWRDevTools>
   );
-}
+};
+
+export const getServerSideProps = () => {
+  return {
+    props: {
+      product: [1, 2, 3, 4],
+    },
+  };
+};
 
 export default Home;

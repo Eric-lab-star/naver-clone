@@ -7,8 +7,7 @@ const Pid: NextPage = () => {
     <div className="flex justify-center items-center">
       <div className="bg-amber-300 border-black border-4 border-solid mt-5 relative w-[900px] h-96">
         <Image
-          // src={"https://i.imgur.com/S0VSylW.png"}
-          src={"S0VSylW.png"}
+          src={opec}
           width="800"
           height="500"
           alt="OPEC Building with people lined up in front of the entrance"

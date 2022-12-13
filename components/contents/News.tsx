@@ -1,5 +1,6 @@
 import { MouseEvent, useEffect, useMemo, useState } from "react";
 import cls from "../../utils/cls";
+
 import MBCJSON from "../../FakeDB/MBCTop.json";
 import SBSJSON from "../../FakeDB/SBSTop.json";
 import KBSJSON from "../../FakeDB/KBSTop.json";
@@ -13,8 +14,9 @@ import Link from "next/link";
 import { StaticType } from "../../types/newsTypes";
 import ChevronLeft from "../SVG/ChevronLeftSVG";
 import ChevronRight from "../SVG/ChevronRightSVG";
+import { NextPage } from "next";
 
-export default function News() {
+const News: NextPage = () => {
   const [page, setPage] = useState<number>(0);
   const [StaticDB, setStaticDB] = useState<StaticType>(MBCJSON);
   const clickNews = (event: MouseEvent<HTMLDivElement>) => {
@@ -109,7 +111,7 @@ export default function News() {
                           src={StaticDB.data[0].imgSrc}
                           className=" bg-slate-200 h-[132px] w-[195px]"
                           alt={`${StaticDB.data[0].title}`}
-                          layout="fill"
+                          fill
                         />
                       ) : (
                         <div className="bg-slate-200 h-[132px] w-[195px]" />
@@ -140,6 +142,7 @@ export default function News() {
             </div>
           </div>
         </div>
+        {/* slider btn */}
         <div
           onClick={() => handlePage(-1)}
           id="left"
@@ -157,4 +160,6 @@ export default function News() {
       </div>
     </div>
   );
-}
+};
+
+export default News;

@@ -6,7 +6,6 @@ const nextConfig = {
     forceSwcTransforms: true,
   },
   images: {
-    loaderFile: "./imageLoader.ts",
     remotePatterns: [
       {
         protocol: "https",

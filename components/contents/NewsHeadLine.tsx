@@ -4,9 +4,13 @@ import useSWR from "swr";
 import { ScrapeType } from "../../types/newsTypes";
 import ChevronLeft from "../SVG/ChevronRightSVG";
 import YTNJSON from "../../FakeDB/YTNTop.json";
-import Head from "next/head";
+import {
+  GetServerSideProps,
+  InferGetServerSidePropsType,
+  NextPage,
+} from "next";
 
-export default function NewsHeadLine() {
+const NewsHeadLine = () => {
   const { data: DB } = useSWR<ScrapeType>("/api/ytnScraper");
   const [index, setIndex] = useState(0);
   useEffect(() => {
@@ -51,4 +55,6 @@ export default function NewsHeadLine() {
       </div>
     </div>
   );
-}
+};
+
+export default NewsHeadLine;
