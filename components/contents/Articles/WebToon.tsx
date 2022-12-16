@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { MouseEvent, useState } from "react";
 import useSWR from "swr";
 import { VideoDB } from "../../../FakeDB/VideoDB";
@@ -31,7 +32,7 @@ export interface IComic {
   };
   dates: {
     type: string;
-    date: Date;
+    date: string;
   }[];
   thumbnail: {
     path: string;
@@ -195,26 +196,29 @@ export default function WebToon({ name, color }: ICategory) {
       <div className="text-sm font-bold py-4">시리즈 실시간 랭킹 NOVEL</div>
       <div className="relative">
         <div key={novelPage} className="grid grid-cols-5 gap-8 pb-10">
-          {WebToonDB.slice(novelPage * 5, (novelPage + 1) * 5).map((novel) => (
-            <div key={novel.id} className="w-[120px] ">
-              <div className="h-[175px] bg-slate-100 mb-3"></div>
-              <div className="text-[11px] space-y-1">
-                <div className="font-semibold text-sm">
-                  {novel.ranking} {novel.title}
-                </div>
-                <div className="text-xs text-slate-700 before:content-['장르_']">
-                  {novel.category}
-                </div>
-                <div className="text-xs text-slate-700 before:content-['작가_']">
-                  {novel.author}
-                </div>
-                <div className="text-xs text-slate-700 before:content-['다운로드_']">
-                  71만
-                </div>
-                <div className="text-green-600 text-xs">25화 무료</div>
-              </div>
-            </div>
-          ))}
+          {Comics
+            ? Comics.data.results
+                .slice(novelPage * 5, (novelPage + 1) * 5)
+                .map((comic) => (
+                  <div key={comic.id} className="w-[120px] ">
+                    <div className="h-[175px] bg-slate-100 mb-3"></div>
+                    <div className="text-[11px] space-y-1">
+                      <div className="font-semibold text-sm">
+                        <>
+                          {`${comic.dates[0].date}`}
+                          {comic.title}
+                        </>
+                      </div>
+                      <div className="text-xs text-slate-700 before:content-['장르_']"></div>
+                      <div className="text-xs text-slate-700 before:content-['작가_']">
+                        {comic.creators.items[0].name}
+                      </div>
+                      <div className="text-xs text-slate-700 before:content-['다운로드_']"></div>
+                      <div className="text-green-600 text-xs"></div>
+                    </div>
+                  </div>
+                ))
+            : "Loading"}
         </div>
         <div
           onClick={() => onTrendingBtnClick(-1)}

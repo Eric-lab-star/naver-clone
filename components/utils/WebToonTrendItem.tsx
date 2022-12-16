@@ -10,6 +10,7 @@ export default function WebToonTrendingItem({ data }: { data: IComic }) {
             alt="comic thumbnail"
             src={`${data.thumbnail.path}/standard_small.jpg`}
             fill
+            sizes="50px "
           />
         ) : null}
       </div>

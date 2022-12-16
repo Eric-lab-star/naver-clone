@@ -9,8 +9,8 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "http",
-        hostname: "i.annihil.us",
-        pathname: "/u/prod/marvel/i/mg/e/30/**/*",
+        hostname: "**/*",
+        pathname: "**/*",
       },
       {
         protocol: "https",
