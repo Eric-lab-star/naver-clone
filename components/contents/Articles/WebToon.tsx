@@ -11,12 +11,71 @@ import SHStack from "../../utils/SHStack";
 import VideoGridItem from "../../utils/VideoGridItem";
 import WebToonTrendingItem from "../../utils/WebToonTrendItem";
 
+export interface IComic {
+  id: number;
+  digitalId: number;
+  title: string;
+  description: string;
+  modified: Date;
+  textObjects: {
+    text: string;
+  }[];
+  resourceURI: string;
+  urls: {
+    type: string;
+    url: string;
+  }[];
+  series: {
+    resourceURI: string;
+    name: string;
+  };
+  dates: {
+    type: string;
+    date: Date;
+  }[];
+  thumbnail: {
+    path: string;
+    extension: string;
+  };
+  images: {
+    path: string;
+    extension: string;
+  }[];
+  creators: {
+    items: {
+      resourceURI: string;
+      name: string;
+      role: string;
+    }[];
+  };
+  characters: {
+    items: {
+      resourceURI: string;
+      name: string;
+    }[];
+  };
+  stories: {
+    items: {
+      resourceURI: string;
+      name: string;
+      type: string;
+    }[];
+  };
+}
+
+interface IComics {
+  code: number;
+  status: string;
+  data: {
+    results: IComic[];
+  };
+}
+
 export default function WebToon({ name, color }: ICategory) {
   const [trendingItem, setTrendingItem] = useState<string>("웹툰");
   const [sliderPage, setSliderPage] = useState<number>(1);
   const [novelPage, setNovelPage] = useState<number>(0);
-  const { data: Comic } = useSWR<IMarvelComic>("/api/marvel");
-
+  const { data: Comics } = useSWR<IComics>("/api/marvel");
   const onSliderBtnClick = (direction: number) => {
     if (direction === -1 && sliderPage === 0) {
       return;
@@ -107,14 +166,22 @@ export default function WebToon({ name, color }: ICategory) {
         </div>
         <div className="pt-4 grid grid-cols-2 gap-10">
           <div className="divide-y space-y-2">
-            {WebToonDB.slice(0, 5).map((webtoon) => (
-              <WebToonTrendingItem data={webtoon} key={webtoon.id} />
-            ))}
+            {Comics
+              ? Comics.data.results
+                  .slice(0, 5)
+                  .map((comic) => (
+                    <WebToonTrendingItem data={comic} key={comic.id} />
+                  ))
+              : "Loading"}
           </div>
           <div className="divide-y space-y-2">
-            {WebToonDB.slice(5, 10).map((webtoon, index) => (
-              <WebToonTrendingItem data={webtoon} key={webtoon.id} />
-            ))}
+            {Comics
+              ? Comics.data.results
+                  .slice(5, 10)
+                  .map((comic) => (
+                    <WebToonTrendingItem data={comic} key={comic.id} />
+                  ))
+              : "Loading"}
           </div>
         </div>
       </div>

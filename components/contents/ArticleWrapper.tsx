@@ -7,15 +7,8 @@ import { CategoryDB } from "../../FakeDB/CategoryDB";
 
 import dynamic from "next/dynamic";
 
-const promise = new Promise<() => JSX.Element>((resolve) => {
-  setTimeout(() => resolve(() => <div>test</div>), 2000);
-});
-
 const WebToon = dynamic(() => import("./Articles/WebToon"));
-const Test = dynamic(() => promise, {
-  ssr: false,
-  loading: () => <div>loading</div>,
-});
+
 const Cars = dynamic(() => import("./Articles/Cars"));
 const Fashion = dynamic(() => import("./Articles/Fashion"));
 const Living = dynamic(() => import("./Articles/Living"));
@@ -42,9 +35,6 @@ export default function ArticleWrapper() {
   };
   return (
     <div className="mt-9 space-y-3 ">
-      <Suspense fallback={<div>loading</div>}>
-        <Test />
-      </Suspense>
       <SectionHeader
         title="오늘 읽을만한 글"
         desc="주제별로 분류된 다양한 글 모음"

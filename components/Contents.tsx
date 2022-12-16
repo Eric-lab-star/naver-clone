@@ -4,7 +4,6 @@ import News from "./contents/News";
 import ArticleWrapper from "./contents/ArticleWrapper";
 import LoginSection from "./contents/LoginBox";
 import TrendShopping from "./contents/TrendShopping";
-import useSWR from "swr";
 
 export default function Body() {
   return (
