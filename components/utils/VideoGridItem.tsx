@@ -1,22 +1,30 @@
+import Image from "next/image";
 import { IVideo } from "../../FakeDB/VideoDB";
-import { IWebtoon } from "../../FakeDB/WebToonDB";
+
+import { IComic } from "../contents/Articles/WebToon";
 
 export default function VideoGridItem({
   videoData,
-  webToonData,
+  comic,
 }: {
   videoData?: IVideo;
-  webToonData?: IWebtoon;
+  comic?: IComic;
 }) {
   return (
     <div className="w-[231px] hover:cursor-pointer">
-      <div className=" h-[130px] bg-slate-300">
+      <div className=" h-[130px] bg-slate-300 relative">
         {videoData?.video}
-        {webToonData?.img}
+        {comic ? (
+          <Image
+            alt="comics"
+            fill
+            src={`${comic.thumbnail.path}/landscape_medium.jpg`}
+          />
+        ) : null}
       </div>
       <div className="font-bold text-[12.5px] line-clamp-2 mt-3   ">
         {videoData?.title}
-        {webToonData?.title}
+        {comic?.title}
       </div>
       <div className=" text-xs text-slate-500 flex items-center space-x-1">
         {videoData?.profileImg && (
@@ -24,11 +32,11 @@ export default function VideoGridItem({
         )}
         <div className="after:content-['_·'] ">
           {videoData?.user}
-          {webToonData?.author}
+          {comic?.creators.items[0].name}
         </div>
         <div>
           {videoData?.date}
-          {webToonData?.uploadDate}
+          {comic?.dates[0].date.slice(0, 10)}
         </div>
       </div>
     </div>

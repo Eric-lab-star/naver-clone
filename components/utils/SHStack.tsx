@@ -1,24 +1,24 @@
+import Image from "next/image";
+
 interface Idata {
-  id?: number;
-  title: string;
-  author: string;
-  category: string;
-  categoryColor: string;
-  className?: string;
+  [key: string]: string;
 }
 
 export default function SHStack({
-  id,
+  key,
   title,
   author,
   category,
   categoryColor,
   className,
+  imgSrc,
 }: Idata) {
   return (
     <div className={className}>
       <div className="flex space-x-4">
-        <div className="w-[100px] h-[100px] bg-slate-200 flex-none"></div>
+        <div className="w-[100px] h-[100px] bg-slate-200 flex-none relative">
+          <Image fill alt="thumbnail" src={imgSrc ? `${imgSrc}` : "/"} />
+        </div>
         <div className="text-sm space-y-1">
           <div className={`${categoryColor} font-semibold text-[12.5px]`}>
             {category}

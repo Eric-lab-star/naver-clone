@@ -102,7 +102,6 @@ export default function WebToon({ name, color }: ICategory) {
     }
     setNovelPage((prev) => (prev = prev + direction));
   };
-  console.log(imgSrc);
   return (
     <>
       <div className=" h-[340px] w-[750px] grid grid-cols-2 gap-6">
@@ -114,7 +113,7 @@ export default function WebToon({ name, color }: ICategory) {
               alt={"thumbnail"}
               src={
                 Comics
-                  ? `${Comics?.data.results[0].thumbnail.path}/landscape_small.jpg`
+                  ? `${Comics?.data.results[0].thumbnail.path}/landscape_medium.jpg`
                   : ""
               }
             />
@@ -133,11 +132,12 @@ export default function WebToon({ name, color }: ICategory) {
           </div>
         </div>
         <div className="w-[335px] h-[325px] grid grid-rows-3 gap-3">
-          {[0, 1, 2].map((v) => (
+          {Comics?.data.results.slice(1, 4).map((comic) => (
             <SHStack
-              key={v}
-              title="너 피어싱 빼지 않았었나?"
-              author="요일별 웹툰"
+              key={comic.id + ""}
+              imgSrc={`${comic.thumbnail.path}/standard_medium.jpg`}
+              title={comic.title}
+              author="Marvel Comics"
               category={name}
               categoryColor={color}
               className="hover:cursor-pointer"
@@ -145,6 +145,7 @@ export default function WebToon({ name, color }: ICategory) {
           ))}
         </div>
       </div>
+      {/* 웹툰 네비 바 */}
       <div className="h-[48px] bg-slate-100 border flex items-center p-5 space-x-5 text-sm font-bold text-slate-800">
         <div className="text-green-500 border-r border-slate-300 pr-4 hover:cursor-pointer hover:underline">
           웹툰 홈 바로가기
@@ -204,13 +205,13 @@ export default function WebToon({ name, color }: ICategory) {
           </div>
         </div>
       </div>
-      {/* 썸네일 */}
+      {/* 큰 썸네일 */}
       <div className="grid grid-cols-3 grid-rows-3 border-y py-5 gap-5">
-        {WebToonDB.slice(0, 9).map((data, i) => (
-          <VideoGridItem webToonData={data} key={i} />
+        {Comics?.data.results.slice(0, 9).map((comic) => (
+          <VideoGridItem comic={comic} key={comic.id} />
         ))}
       </div>
-
+      {/* 실시간 랭킹 노블 슬라이더 */}
       <div className="text-sm font-bold py-4">시리즈 실시간 랭킹 NOVEL</div>
       <div className="relative">
         <div key={novelPage} className="grid grid-cols-5 gap-8 pb-10">
@@ -219,20 +220,23 @@ export default function WebToon({ name, color }: ICategory) {
                 .slice(novelPage * 5, (novelPage + 1) * 5)
                 .map((comic) => (
                   <div key={comic.id} className="w-[120px] ">
-                    <div className="h-[175px] bg-slate-100 mb-3"></div>
+                    <div className="h-[175px] bg-slate-100 mb-3 relative">
+                      <Image
+                        alt="comics book cover"
+                        fill
+                        src={`${comic.thumbnail.path}/portrait_medium.jpg`}
+                      />
+                    </div>
                     <div className="text-[11px] space-y-1">
-                      <div className="font-semibold text-sm">
-                        <>
-                          {`${comic.dates[0].date}`}
-                          {comic.title}
-                        </>
+                      <div className="font-semibold text-[13px] line-clamp-2 h-10">
+                        {comic.title}
                       </div>
-                      <div className="text-xs text-slate-700 before:content-['장르_']"></div>
+                      <div className="text-xs text-slate-700 before:content-['출시일_']">
+                        {comic.dates[0].date.slice(0, 10)}
+                      </div>
                       <div className="text-xs text-slate-700 before:content-['작가_']">
                         {comic.creators.items[0].name}
                       </div>
-                      <div className="text-xs text-slate-700 before:content-['다운로드_']"></div>
-                      <div className="text-green-600 text-xs"></div>
                     </div>
                   </div>
                 ))
@@ -258,21 +262,27 @@ export default function WebToon({ name, color }: ICategory) {
         </div>
         <div className="relative" key={sliderPage}>
           <div className="grid grid-cols-4 relative  pb-6  place-items-center">
-            {WebToonDB.slice(sliderPage * 4, (sliderPage + 1) * 4).map(
-              (webtoon, webtoonIndex) => (
-                <div key={webtoonIndex} className="w-[140px] ">
-                  <div className=" h-[100px] bg-slate-200"></div>
+            {Comics?.data.results
+              .slice(sliderPage * 4, (sliderPage + 1) * 4)
+              .map((comic) => (
+                <div key={comic.id} className="w-[140px] ">
+                  <div className=" h-[100px] bg-slate-200 relative">
+                    <Image
+                      alt="comics"
+                      fill
+                      src={`${comic.thumbnail.path}/landscape_small.jpg`}
+                    />
+                  </div>
                   <div className="mt-3">
-                    <div className="text-[13px] font-semibold text-black">
-                      {webtoon.title}
+                    <div className="text-[13px] font-semibold text-black line-clamp-1">
+                      {comic.title}
                     </div>
                     <div className="text-xs text-slate-500">
-                      {webtoon.author}
+                      {comic.creators.items[0].name}
                     </div>
                   </div>
                 </div>
-              )
-            )}
+              ))}
           </div>
           <div
             onClick={() => onSliderBtnClick(-1)}
@@ -304,10 +314,6 @@ export default function WebToon({ name, color }: ICategory) {
                 <div className="text-xs text-slate-700 before:content-['작가_']">
                   {novel.author}
                 </div>
-                <div className="text-xs text-slate-700 before:content-['다운로드_']">
-                  71만
-                </div>
-                <div className="text-green-600 text-xs">25화 무료</div>
               </div>
             </div>
           ))}
