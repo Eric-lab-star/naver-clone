@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { MouseEvent, useState } from "react";
+import { useRecoilValue } from "recoil";
 import useSWR from "swr";
+import { imgState } from "../../../atoms";
 import { VideoDB } from "../../../FakeDB/VideoDB";
 import { WebToonDB } from "../../../FakeDB/WebToonDB";
-import { IMarvelComic } from "../../../pages/api/marvel";
 import { ICategory } from "../../../types/categoryTypes";
 import cls from "../../../utils/cls";
 import ChevronLeft from "../../SVG/ChevronLeftSVG";
@@ -73,6 +74,7 @@ interface IComics {
 }
 
 export default function WebToon({ name, color }: ICategory) {
+  const imgSrc = useRecoilValue(imgState);
   const [trendingItem, setTrendingItem] = useState<string>("웹툰");
   const [sliderPage, setSliderPage] = useState<number>(1);
   const [novelPage, setNovelPage] = useState<number>(0);
@@ -100,18 +102,34 @@ export default function WebToon({ name, color }: ICategory) {
     }
     setNovelPage((prev) => (prev = prev + direction));
   };
+  console.log(imgSrc);
   return (
     <>
       <div className=" h-[340px] w-[750px] grid grid-cols-2 gap-6">
         <div className="w-[366px] space-y-2">
-          <div className=" bg-slate-100 border h-[180px]"></div>
+          <div className=" bg-slate-100 border h-[180px] relative">
+            <Image
+              fill
+              sizes="366px"
+              alt={"thumbnail"}
+              src={
+                Comics
+                  ? `${Comics?.data.results[0].thumbnail.path}/landscape_small.jpg`
+                  : ""
+              }
+            />
+          </div>
           <div className="text-[12.5px] space-y-1">
             <div className="text-green-500  font-bold">{name}</div>
             <div className="text-slate-800 font-bold ">
-              신작 &lt;고교흥신소&gt;1화 보러가기
+              {Comics ? Comics.data.results[0].title : "Comics"}
             </div>
-            <div>김성모 작가의 화려한 귀환! 고등학생이... 흥신소?!</div>
-            <div>김성모</div>
+            <div>{Comics ? Comics.data.results[0].description : "Detail"}</div>
+            <div>
+              {Comics
+                ? Comics.data.results[0].creators.items[0].name
+                : "Creator"}
+            </div>
           </div>
         </div>
         <div className="w-[335px] h-[325px] grid grid-rows-3 gap-3">
