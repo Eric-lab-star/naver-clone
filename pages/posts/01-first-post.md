@@ -1,6 +1,6 @@
 ---
 title: Welcome Everyone
-date: 2022.02.02
+date: 2022-02-02
 category: thoughts
 ---
 
