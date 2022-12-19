@@ -102,6 +102,7 @@ export default function WebToon({ name, color }: ICategory) {
     }
     setNovelPage((prev) => (prev = prev + direction));
   };
+  console.log(imgSrc);
   return (
     <>
       <div className=" h-[340px] w-[750px] grid grid-cols-2 gap-6">

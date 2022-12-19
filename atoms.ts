@@ -5,7 +5,8 @@ export const imgState = atom<{
   height: number;
   type?: string;
   width: number;
+  blurDataURL: string;
 }>({
   key: "imgState",
-  default: { src: "", height: 0, type: "jpg", width: 0 },
+  default: { src: "", height: 0, width: 0, blurDataURL: "" },
 });

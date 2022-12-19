@@ -11,17 +11,18 @@ import { BlurhashCanvas } from "react-blurhash";
 import { useSetRecoilState } from "recoil";
 import { imgState } from "../atoms";
 import { useEffect } from "react";
+import md5 from "md5";
+import Image from "next/image";
 
 const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
-  img,
-  blurhash,
+  imageProps,
 }) => {
   const setImgsrc = useSetRecoilState(imgState);
   useEffect(() => {
-    if (img) {
-      setImgsrc(img);
+    if (imageProps) {
+      setImgsrc(imageProps);
     }
-  }, [img, setImgsrc]);
+  }, [imageProps, setImgsrc]);
   return (
     <SWRDevTools>
       <SWRConfig
@@ -38,6 +39,9 @@ const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
           <Head>
             <title>Naver Clone</title>
           </Head>
+          <div className="w-[800px] relative bg-white">
+            <Image {...imageProps} placeholder="blur" alt="sample" />
+          </div>
           <SearchBar />
           <Navbar />
           <Contents />
@@ -49,14 +53,39 @@ const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
 };
 
 export const getStaticProps = async () => {
-  const { blurhash, img } = await getPlaiceholder(
+  const publicKey = process.env.MARVEL + "";
+  const privateKey = process.env.MARVEL_PRIV + "";
+  const ts = 2;
+  const hash = md5(ts + privateKey + publicKey);
+  const baseURL = "http://gateway.marvel.com/v1/public";
+  const config = {
+    limit: 10,
+    orderBy: "onsaleDate",
+    formatType: "comic",
+    dateDescriptor: "lastWeek",
+  };
+  let option = "";
+  for (const [property, key] of Object.entries(config)) {
+    option = option + `&${property}=${key}`;
+  }
+  const param = decodeURIComponent(option);
+
+  const response = await fetch(
+    `${baseURL}/comics?ts=${ts}&apikey=${publicKey}&hash=${hash}${param}`
+  );
+
+  const data = await response.json();
+
+  const { base64, img } = await getPlaiceholder(
     "https://i.annihil.us/u/prod/marvel/i/mg/e/30/635931932c976/landscape_medium.jpg"
   );
 
   return {
     props: {
-      img,
-      blurhash,
+      imageProps: {
+        ...img,
+        blurDataURL: base64,
+      },
     },
   };
 };

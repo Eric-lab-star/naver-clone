@@ -14,42 +14,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "i.imgur.com",
-        pathname: "**/*",
-      },
-      {
-        protocol: "http",
-        hostname: "openweathermap.org",
-        pathname: "/img/wn/**",
-      },
-      {
-        protocol: "https",
-        hostname: "image.imnews.imbc.com",
-        pathname: "**/*",
-      },
-      {
-        protocol: "https",
-        hostname: "img.sbs.co.kr",
-        pathname: "**/*",
-      },
-      {
-        protocol: "https",
-        hostname: "news.kbs.co.kr",
-        pathname: "**/*",
-      },
-      {
-        protocol: "https",
-        hostname: "photo.jtbc.co.kr",
-        pathname: "**/*",
-      },
-      {
-        protocol: "https",
-        hostname: "image.ytn.co.kr",
-        pathname: "**/*",
-      },
-      {
-        protocol: "https",
-        hostname: "ssl.pstatic.net",
+        hostname: "**/*",
         pathname: "**/*",
       },
     ],
