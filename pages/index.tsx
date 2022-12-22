@@ -39,9 +39,7 @@ const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
           <Head>
             <title>Naver Clone</title>
           </Head>
-          <div className="w-[800px] relative bg-white">
-            <Image {...imageProps} placeholder="blur" alt="sample" />
-          </div>
+
           <SearchBar />
           <Navbar />
           <Contents />
