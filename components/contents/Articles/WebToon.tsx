@@ -1,14 +1,11 @@
 import Image from "next/image";
 import { MouseEvent, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import useSWR from "swr";
-import { imgState } from "../../../atoms";
-import { VideoDB } from "../../../FakeDB/VideoDB";
-import { WebToonDB } from "../../../FakeDB/WebToonDB";
+import { comicState, newComicState } from "../../../atoms";
 import { ICategory } from "../../../types/categoryTypes";
 import cls from "../../../utils/cls";
-import ChevronLeft from "../../SVG/ChevronLeftSVG";
-import ChevronRight from "../../SVG/ChevronRightSVG";
+import Slider from "../../slider";
 import SHStack from "../../utils/SHStack";
 import VideoGridItem from "../../utils/VideoGridItem";
 import WebToonTrendingItem from "../../utils/WebToonTrendItem";
@@ -74,35 +71,15 @@ interface IComics {
 }
 
 export default function WebToon({ name, color }: ICategory) {
-  const imgSrc = useRecoilValue(imgState);
   const [trendingItem, setTrendingItem] = useState<string>("웹툰");
-  const [sliderPage, setSliderPage] = useState<number>(1);
-  const [novelPage, setNovelPage] = useState<number>(0);
+  const [newComicpage, setNewComicState] = useRecoilState(newComicState);
+  const [comicPage, setComicState] = useRecoilState(comicState);
   const { data: Comics } = useSWR<IComics>("/api/marvel");
-  const onSliderBtnClick = (direction: number) => {
-    if (direction === -1 && sliderPage === 0) {
-      return;
-    }
-    if (direction === 1 && (sliderPage + 1) * 4 >= VideoDB.length - 1) {
-      return;
-    }
-    setSliderPage((prev) => (prev = prev + direction));
-  };
+
   const handleTrendingItem = (event: MouseEvent<HTMLDivElement>) => {
     const text = event.currentTarget.innerText;
     setTrendingItem(text);
   };
-
-  const onTrendingBtnClick = (direction: number) => {
-    if (direction === -1 && novelPage === 0) {
-      return;
-    }
-    if (direction === 1 && (novelPage + 1) * 5 >= WebToonDB.length - 1) {
-      return;
-    }
-    setNovelPage((prev) => (prev = prev + direction));
-  };
-  console.log(imgSrc);
   return (
     <>
       <div className=" h-[340px] w-[750px] grid grid-cols-2 gap-6">
@@ -213,12 +190,12 @@ export default function WebToon({ name, color }: ICategory) {
         ))}
       </div>
       {/* 실시간 랭킹 노블 슬라이더 */}
-      <div className="text-sm font-bold py-4">시리즈 실시간 랭킹 NOVEL</div>
-      <div className="relative">
-        <div key={novelPage} className="grid grid-cols-5 gap-8 pb-10">
+      <div className="text-sm font-bold py-4">시리즈 실시간 랭킹 COMIC</div>
+      <Slider setState={setComicState} maxItem={10} page={comicPage} items={5}>
+        <div key={comicPage} className="grid grid-cols-5 gap-8 pb-10">
           {Comics
             ? Comics.data.results
-                .slice(novelPage * 5, (novelPage + 1) * 5)
+                .slice(comicPage * 5, (comicPage + 1) * 5)
                 .map((comic) => (
                   <div key={comic.id} className="w-[120px] ">
                     <div className="h-[175px] bg-slate-100 mb-3 relative">
@@ -243,35 +220,29 @@ export default function WebToon({ name, color }: ICategory) {
                 ))
             : "Loading"}
         </div>
-        <div
-          onClick={() => onTrendingBtnClick(-1)}
-          className="top-[70px] w-[30px] hover:cursor-pointer absolute -left-5 aspect-square rounded-full shadow-slate-300 shadow-md bg-white flex justify-center items-center"
-        >
-          <ChevronLeft className="text-slate-700 w-4" />
-        </div>
-        <div
-          onClick={() => onTrendingBtnClick(1)}
-          className="top-[70px] w-[30px] hover:cursor-pointer absolute  -right-5 aspect-square rounded-full shadow-slate-300 shadow-md bg-white flex justify-center items-center"
-        >
-          <ChevronRight className="text-slate-700 w-4" />
-        </div>
-      </div>
-      {/* 슬라이드 */}
+      </Slider>
+      {/* 이번주 가장 많이 본 신작 TOP 10 */}
       <div className="border-y ">
         <div className="text-black font-bold text-[14px] py-6">
           이번주 가장 많이 본 신작 TOP 10
         </div>
-        <div className="relative" key={sliderPage}>
+        <Slider
+          setState={setNewComicState}
+          sliderBtnPos={{ lt: 35, rt: 35 }}
+          maxItem={10}
+          items={4}
+          page={newComicpage}
+        >
           <div className="grid grid-cols-4 relative  pb-6  place-items-center">
             {Comics?.data.results
-              .slice(sliderPage * 4, (sliderPage + 1) * 4)
+              .slice(newComicpage * 4, (newComicpage + 1) * 4)
               .map((comic) => (
                 <div key={comic.id} className="w-[140px] ">
                   <div className=" h-[100px] bg-slate-200 relative">
                     <Image
                       alt="comics"
                       fill
-                      src={`${comic.thumbnail.path}/landscape_small.jpg`}
+                      src={`${comic.thumbnail.path}/standard_medium.jpg`}
                     />
                   </div>
                   <div className="mt-3">
@@ -285,124 +256,7 @@ export default function WebToon({ name, color }: ICategory) {
                 </div>
               ))}
           </div>
-          <div
-            onClick={() => onSliderBtnClick(-1)}
-            className="top-[30px] w-[30px] hover:cursor-pointer absolute -left-5 aspect-square rounded-full shadow-slate-300 shadow-md bg-white flex justify-center items-center"
-          >
-            <ChevronLeft className="text-slate-700 w-4" />
-          </div>
-          <div
-            onClick={() => onSliderBtnClick(1)}
-            className="top-[30px] w-[30px] hover:cursor-pointer absolute  -right-5 aspect-square rounded-full shadow-slate-300 shadow-md bg-white flex justify-center items-center"
-          >
-            <ChevronRight className="text-slate-700 w-4" />
-          </div>
-        </div>
-      </div>
-      <div className="text-sm font-bold py-4">시리즈 실시간 랭킹 COMIX</div>
-      <div className="relative">
-        <div key={novelPage} className="grid grid-cols-5 gap-8 pb-10">
-          {WebToonDB.slice(novelPage * 5, (novelPage + 1) * 5).map((novel) => (
-            <div key={novel.id} className="w-[120px] ">
-              <div className="h-[175px] bg-slate-100 mb-3"></div>
-              <div className="text-[11px] space-y-1">
-                <div className="font-semibold text-sm">
-                  {novel.ranking} {novel.title}
-                </div>
-                <div className="text-xs text-slate-700 before:content-['장르_']">
-                  {novel.category}
-                </div>
-                <div className="text-xs text-slate-700 before:content-['작가_']">
-                  {novel.author}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div
-          onClick={() => onTrendingBtnClick(-1)}
-          className="top-[70px] w-[30px] hover:cursor-pointer absolute -left-5 aspect-square rounded-full shadow-slate-300 shadow-md bg-white flex justify-center items-center"
-        >
-          <ChevronLeft className="text-slate-700 w-4" />
-        </div>
-        <div
-          onClick={() => onTrendingBtnClick(1)}
-          className="top-[70px] w-[30px] hover:cursor-pointer absolute  -right-5 aspect-square rounded-full shadow-slate-300 shadow-md bg-white flex justify-center items-center"
-        >
-          <ChevronRight className="text-slate-700 w-4" />
-        </div>
-      </div>
-      <div className="border-y ">
-        <div className="text-black font-bold text-[14px] py-6">
-          이번주 가장 많이 본 완결작 TOP 10
-        </div>
-        <div className="relative" key={sliderPage}>
-          <div className="grid grid-cols-4 relative  pb-6  place-items-center">
-            {WebToonDB.slice(sliderPage * 4, (sliderPage + 1) * 4).map(
-              (webtoon, webtoonIndex) => (
-                <div key={webtoonIndex} className="w-[140px] ">
-                  <div className=" h-[100px] bg-slate-200"></div>
-                  <div className="mt-3">
-                    <div className="text-[13px] font-semibold text-black">
-                      {webtoon.title}
-                    </div>
-                    <div className="text-xs text-slate-500">
-                      {webtoon.author}
-                    </div>
-                  </div>
-                </div>
-              )
-            )}
-          </div>
-          <div
-            onClick={() => onSliderBtnClick(-1)}
-            className="top-[30px] w-[30px] hover:cursor-pointer absolute -left-5 aspect-square rounded-full shadow-slate-300 shadow-md bg-white flex justify-center items-center"
-          >
-            <ChevronLeft className="text-slate-700 w-4" />
-          </div>
-          <div
-            onClick={() => onSliderBtnClick(1)}
-            className="top-[30px] w-[30px] hover:cursor-pointer absolute  -right-5 aspect-square rounded-full shadow-slate-300 shadow-md bg-white flex justify-center items-center"
-          >
-            <ChevronRight className="text-slate-700 w-4" />
-          </div>
-        </div>
-      </div>
-      <div className="pb-32 ">
-        <div className="text-black font-bold text-[14px] py-6">
-          추천 베스트리그 웹소설
-        </div>
-        <div className="relative" key={sliderPage}>
-          <div className="grid grid-cols-4 relative  pb-6  place-items-center">
-            {WebToonDB.slice(sliderPage * 4, (sliderPage + 1) * 4).map(
-              (webtoon, webtoonIndex) => (
-                <div key={webtoonIndex} className="w-[140px] ">
-                  <div className=" h-[100px] bg-slate-200"></div>
-                  <div className="mt-3">
-                    <div className="text-[13px] font-semibold text-black">
-                      {webtoon.title}
-                    </div>
-                    <div className="text-xs text-slate-500">
-                      {webtoon.author}
-                    </div>
-                  </div>
-                </div>
-              )
-            )}
-          </div>
-          <div
-            onClick={() => onSliderBtnClick(-1)}
-            className="top-[30px] w-[30px] hover:cursor-pointer absolute -left-5 aspect-square rounded-full shadow-slate-300 shadow-md bg-white flex justify-center items-center"
-          >
-            <ChevronLeft className="text-slate-700 w-4" />
-          </div>
-          <div
-            onClick={() => onSliderBtnClick(1)}
-            className="top-[30px] w-[30px] hover:cursor-pointer absolute  -right-5 aspect-square rounded-full shadow-slate-300 shadow-md bg-white flex justify-center items-center"
-          >
-            <ChevronRight className="text-slate-700 w-4" />
-          </div>
-        </div>
+        </Slider>
       </div>
     </>
   );

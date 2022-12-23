@@ -7,12 +7,10 @@ import { SWRConfig } from "swr";
 import { SWRDevTools } from "swr-devtools";
 import Head from "next/head";
 import { getPlaiceholder } from "plaiceholder";
-import { BlurhashCanvas } from "react-blurhash";
 import { useSetRecoilState } from "recoil";
 import { imgState } from "../atoms";
 import { useEffect } from "react";
 import md5 from "md5";
-import Image from "next/image";
 
 const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
   imageProps,
