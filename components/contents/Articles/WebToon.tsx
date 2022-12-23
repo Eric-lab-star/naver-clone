@@ -111,15 +111,16 @@ export default function WebToon({ name, color }: ICategory) {
         </div>
         <div className="w-[335px] h-[325px] grid grid-rows-3 gap-3">
           {Comics?.data.results.slice(1, 4).map((comic) => (
-            <SHStack
-              key={comic.id + ""}
-              imgSrc={`${comic.thumbnail.path}/standard_medium.jpg`}
-              title={comic.title}
-              author="Marvel Comics"
-              category={name}
-              categoryColor={color}
-              className="hover:cursor-pointer"
-            />
+            <div key={comic.id}>
+              <SHStack
+                imgSrc={`${comic.thumbnail.path}/standard_medium.jpg`}
+                title={comic.title}
+                author="Marvel Comics"
+                category={name}
+                categoryColor={color}
+                className="hover:cursor-pointer"
+              />
+            </div>
           ))}
         </div>
       </div>
@@ -201,6 +202,7 @@ export default function WebToon({ name, color }: ICategory) {
                     <div className="h-[175px] bg-slate-100 mb-3 relative">
                       <Image
                         alt="comics book cover"
+                        sizes="175px"
                         fill
                         src={`${comic.thumbnail.path}/portrait_medium.jpg`}
                       />
@@ -241,6 +243,7 @@ export default function WebToon({ name, color }: ICategory) {
                   <div className=" h-[100px] bg-slate-200 relative">
                     <Image
                       alt="comics"
+                      sizes="100px"
                       fill
                       src={`${comic.thumbnail.path}/standard_medium.jpg`}
                     />

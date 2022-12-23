@@ -1,4 +1,4 @@
-import type { InferGetStaticPropsType, NextPage } from "next";
+import type { InferGetStaticPropsType } from "next";
 import Navbar from "../components/Navbar";
 import SearchBar from "../components/SearchBar";
 import Contents from "../components/Contents";
@@ -14,6 +14,7 @@ import md5 from "md5";
 
 const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
   imageProps,
+  data,
 }) => {
   const setImgsrc = useSetRecoilState(imgState);
   useEffect(() => {
@@ -26,7 +27,7 @@ const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
       <SWRConfig
         value={{
           fallback: {
-            "/api/product": [1, 2, 3],
+            "/api/marvel": data,
           },
           revalidateOnFocus: false,
           fetcher: (resource, init) =>
@@ -78,6 +79,7 @@ export const getStaticProps = async () => {
 
   return {
     props: {
+      data,
       imageProps: {
         ...img,
         blurDataURL: base64,

@@ -18,6 +18,7 @@ export default function VideoGridItem({
           <Image
             alt="comics"
             fill
+            sizes="231px"
             src={`${comic.thumbnail.path}/landscape_medium.jpg`}
           />
         ) : null}
