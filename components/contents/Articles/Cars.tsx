@@ -54,14 +54,15 @@ export default function Cars({ name, color }: ICategory) {
         </div>
         <div className="w-[335px] h-[325px] grid grid-rows-3 gap-3">
           {[0, 1, 2].map((v) => (
-            <SHStack
-              key={v}
-              title="강력 그리고 화끈, 랜드로버 100 P400X"
-              author="무브브로"
-              category="자동차 소식"
-              categoryColor="text-blue-500"
-              className="hover:cursor-pointer"
-            />
+            <div key={v}>
+              <SHStack
+                title="강력 그리고 화끈, 랜드로버 100 P400X"
+                author="무브브로"
+                category="자동차 소식"
+                categoryColor="text-blue-500"
+                className="hover:cursor-pointer"
+              />
+            </div>
           ))}
         </div>
       </div>
