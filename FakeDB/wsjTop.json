@@ -1,0 +1,36 @@
+{
+  "data": [
+    {
+      "href": "https://www.wsj.com/articles/biden-signs-up-for-climate-change-reparations-europe-fund-un-john-kerry-poor-countries-bank-capitalism-11668974219?mod=hp_trending_now_opn_pos1",
+      "title": "Opinion: Biden Signs Up for Climate Reparations",
+      "id": 0,
+      "imgSrc": null
+    },
+    {
+      "id": 1,
+      "title": "How Elon Musk’s Twitter Faces Mountain of Debt, Falling Revenue and Surging Costs",
+      "href": "https://www.wsj.com/articles/how-elon-musks-twitter-faces-mountain-of-debt-falling-revenue-and-surging-costs-11669042132?mod=hp_trending_now_article_pos1"
+    },
+    {
+      "id": 2,
+      "title": "Disney Ousts Chapek, Iger Returns as CEO",
+      "href": "https://www.wsj.com/articles/walt-disney-names-bob-iger-ceo-replacing-bob-chapek-11669000050?mod=hp_trending_now_article_pos2"
+    },
+    {
+      "id": 3,
+      "title": "Beyond Meat’s Very Real Problems: Slumping Sausages, Mounting Losses",
+      "href": "https://www.wsj.com/articles/beyond-meat-ethan-brown-stock-layoffs-sausages-11668963839?mod=hp_trending_now_article_pos3"
+    },
+    {
+      "id": 4,
+      "title": "How Caroline Ellison Landed at the Center of the FTX Crypto Collapse",
+      "href": "https://www.wsj.com/articles/how-caroline-ellison-found-herself-at-the-center-of-the-ftx-crypto-collapse-11668899604?mod=hp_trending_now_article_pos4"
+    },
+    {
+      "id": 5,
+      "title": "Amazon Has a Problem: Consumers Don’t Love It as Much as They Used To",
+      "href": "https://www.wsj.com/articles/amazons-customer-satisfaction-slips-with-shoppers-11668986981?mod=hp_trending_now_article_pos5"
+    }
+  ],
+  "time": { "year": 2022, "month": 10, "date": 22, "hours": 13, "min": 24 }
+}

@@ -1,0 +1,36 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "title": "\"MBC 기자 찾아가겠다\"‥신변위협 수사 착수",
+      "href": "https://imnews.imbc.com/replay/2022/nwtoday/article/6429221_35752.html",
+      "imgSrc": "https://image.imnews.imbc.com/replay/2022/nwtoday/article/__icsFiles/afieldfile/2022/11/22/today_20221122_071100_2_17_Small.jpg"
+    },
+    {
+      "id": 2,
+      "title": "용산서장 \"평생 죄인\"‥'기동대 요청' 조사",
+      "href": "https://imnews.imbc.com/replay/2022/nwtoday/article/6429203_35752.html"
+    },
+    {
+      "id": 3,
+      "title": "석방되자 입 연 남욱‥\"시장실 몫 지분 들어\"",
+      "href": "https://imnews.imbc.com/replay/2022/nwtoday/article/6429202_35752.html"
+    },
+    {
+      "id": 4,
+      "title": "출근길 약식회견 중단‥MBC 징계도 추진",
+      "href": "https://imnews.imbc.com/replay/2022/nwtoday/article/6429200_35752.html"
+    },
+    {
+      "id": 5,
+      "title": "인도네시아 규모 5.6 지진‥\"최소 160명 사망\"",
+      "href": "https://imnews.imbc.com/replay/2022/nwtoday/article/6429198_35752.html"
+    },
+    {
+      "id": 6,
+      "title": "잉글랜드 '골 잔치'‥네덜란드 진땀승",
+      "href": "https://imnews.imbc.com/replay/2022/nwtoday/article/6429196_35752.html"
+    }
+  ],
+  "time": { "year": 2022, "month": 10, "date": 22, "hours": 13, "min": 24 }
+}

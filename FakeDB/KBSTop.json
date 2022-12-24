@@ -1,0 +1,41 @@
+{
+  "data": [
+    {
+      "title": "대통령실 “김건희 여사 사진 ‘허위사실 유포 혐의’ 장경태 고발”",
+      "imgSrc": "https://news.kbs.co.kr/data/layer/904/2022/11/20221122_vS4CJh.jpg",
+      "href": "https://news.kbs.co.kr/news/view.do?ncd=5606999",
+      "id": 0
+    },
+    {
+      "id": 1,
+      "title": "“연인과 애정 표현 과했다가는?”…‘카타르 월드컵’ 이모저모",
+      "href": "https://news.kbs.co.kr/news/view.do?ncd=5606625"
+    },
+    {
+      "id": 2,
+      "title": "“본선 못나갔지만”…중국은 왜 월드컵에 관심이 많을까?",
+      "href": "https://news.kbs.co.kr/news/view.do?ncd=5606662"
+    },
+    {
+      "id": 3,
+      "title": "동영상[단독] 매일 30명 투입?…용산구청 ‘근무수당 내역’ 살펴봤더니",
+      "href": "https://news.kbs.co.kr/news/view.do?ncd=5606466"
+    },
+    {
+      "id": 4,
+      "title": "대통령실 “김건희 여사 사진 ‘허위사실 유포 혐의’ 장경태 고발”",
+      "href": "https://news.kbs.co.kr/news/view.do?ncd=5606999"
+    },
+    {
+      "id": 5,
+      "title": "동영상[영상] 골키퍼의 연이은 실수…92년 전통 깨졌다",
+      "href": "https://news.kbs.co.kr/news/view.do?ncd=5606093"
+    },
+    {
+      "id": 6,
+      "title": "동영상‘이태원 현장 지휘’ 용산 경찰·소방서장, 10시간 넘게 조사받아",
+      "href": "https://news.kbs.co.kr/news/view.do?ncd=5606639"
+    }
+  ],
+  "time": { "year": 2022, "month": 10, "date": 22, "hours": 13, "min": 24 }
+}
