@@ -1,12 +1,9 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import useSWR from "swr";
-import { ScrapeType } from "../../types/newsTypes";
 import ChevronLeft from "../SVG/ChevronRightSVG";
 import YTNJSON from "../../FakeDB/YTNTop.json";
 
 const NewsHeadLine = () => {
-  const { data: DB } = useSWR<ScrapeType>("/api/ytnScraper");
   const [index, setIndex] = useState(0);
   useEffect(() => {
     const timerId = setInterval(() => {
@@ -28,18 +25,14 @@ const NewsHeadLine = () => {
           </div>
         </Link>
         <div className="w-[320px] absolute left-20 hover:cursor-pointer line-clamp-1">
-          {DB?.data ? (
-            <Link href={DB.data[index].href || ""} key={DB.data[index].id}>
-              <div className="truncate">{DB.data[index].title}</div>
-            </Link>
-          ) : (
+          {
             <Link
               href={YTNJSON.data[index].href || ""}
               key={YTNJSON.data[index].id}
             >
               <div className="truncate">{YTNJSON.data[index].title}</div>
             </Link>
-          )}
+          }
         </div>
       </div>
       <div className="flex font-bold text-sm space-x-2">
