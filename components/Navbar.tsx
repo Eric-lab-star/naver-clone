@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import MailSvg from "./SVG/MailSvg";
 import NavbarItem from "./utils/NavBarItems";
-import WeatherBanner from "./weatherBanner";
+
 export default function Navbar() {
   const navList = [
     "메일",
@@ -33,7 +33,6 @@ export default function Navbar() {
             <NavbarItem key={value} value={value} index={index} />
           ))}
         </div>
-        <WeatherBanner />
       </div>
     </div>
   );
