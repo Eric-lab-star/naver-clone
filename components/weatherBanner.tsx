@@ -1,6 +1,6 @@
 import { setCookie } from "cookies-next";
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
+
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 import { IReverseGeo } from "../pages/api/reverseGeo";
@@ -76,16 +76,6 @@ export default function WeatherBanner() {
 
         {counter % 2 === 0 && (
           <div className=" flex text-[15px] text-slate-800 items-center font-semibold space-x-1">
-            <div className="w-10 h-10 relative left-2 overflow-hidden">
-              {weatherData?.weather[0]?.icon && (
-                <Image
-                  className="object-fit"
-                  src={`http://openweathermap.org/img/wn/${weatherData?.weather[0].icon}@2x.png`}
-                  alt="icon"
-                  fill
-                />
-              )}
-            </div>
             <div>
               <span>{weatherData?.main?.temp || "--"}</span>
               <span className="text-xs">&#8451;</span>

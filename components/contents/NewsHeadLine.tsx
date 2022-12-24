@@ -4,11 +4,6 @@ import useSWR from "swr";
 import { ScrapeType } from "../../types/newsTypes";
 import ChevronLeft from "../SVG/ChevronRightSVG";
 import YTNJSON from "../../FakeDB/YTNTop.json";
-import {
-  GetServerSideProps,
-  InferGetServerSidePropsType,
-  NextPage,
-} from "next";
 
 const NewsHeadLine = () => {
   const { data: DB } = useSWR<ScrapeType>("/api/ytnScraper");
