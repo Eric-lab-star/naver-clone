@@ -21,7 +21,7 @@ const News: NextPage = () => {
   const [StaticDB, setStaticDB] = useState<StaticType>(MBCJSON);
   const clickNews = (event: MouseEvent<HTMLDivElement>) => {
     const text = event.currentTarget.innerHTML;
-    const index = newsList.findIndex((v, i, a) => {
+    const index = newsList.findIndex((_, i, a) => {
       return a[i] === text;
     });
     setPage(index);
@@ -112,6 +112,7 @@ const News: NextPage = () => {
                           className=" bg-slate-200 h-[132px] w-[195px]"
                           alt={`${StaticDB.data[0].title}`}
                           fill
+                          sizes="132px"
                         />
                       ) : (
                         <div className="bg-slate-200 h-[132px] w-[195px]" />

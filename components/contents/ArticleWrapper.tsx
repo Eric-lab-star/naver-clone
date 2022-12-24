@@ -1,11 +1,11 @@
-import { MouseEvent, Suspense, useMemo, useState } from "react";
+import { MouseEvent, useState } from "react";
 import CategoryBar from "../utils/CategoryBar";
 import SectionHeader from "../SectionHeader";
 import ChevronLeft from "../SVG/ChevronLeftSVG";
 import ChevronRight from "../SVG/ChevronRightSVG";
-import { CategoryDB } from "../../FakeDB/CategoryDB";
 
 import dynamic from "next/dynamic";
+import { CategoryDB } from "../../FakeDB/CategoryDB";
 
 const WebToon = dynamic(() => import("./Articles/WebToon"));
 
@@ -59,11 +59,11 @@ export default function ArticleWrapper() {
         </div>
       </div>
       {/* articles */}
+      {name === "웹툰" ? <WebToon name={name} color={color} /> : null}
       {name === "리빙" ? <Living name={name} color={color} /> : null}
       {name === "책방" ? <Books name={name} color={color} /> : null}
       {name === "경제" ? <Economy name={name} color={color} /> : null}
       {name === "자동차" ? <Cars name={name} color={color} /> : null}
-      {name === "웹툰" ? <WebToon name={name} color={color} /> : null}
       {name === "패션뷰티" ? <Fashion name={name} color={color} /> : null}
     </div>
   );

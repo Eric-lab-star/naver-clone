@@ -1,4 +1,4 @@
-import type { InferGetStaticPropsType, NextPage } from "next";
+import type { NextPage } from "next";
 import Navbar from "../components/Navbar";
 import SearchBar from "../components/SearchBar";
 import Contents from "../components/Contents";
@@ -6,10 +6,6 @@ import Footer from "../components/Footer";
 import { SWRConfig } from "swr";
 import { SWRDevTools } from "swr-devtools";
 import Head from "next/head";
-
-import { useSetRecoilState } from "recoil";
-import { imgState } from "../atoms";
-import { useEffect } from "react";
 
 const Home: React.FC<NextPage> = () => {
   return (

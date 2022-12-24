@@ -84,7 +84,7 @@ export default function WebToon({ name, color }: ICategory) {
     <>
       <div className=" h-[340px] w-[750px] grid grid-cols-2 gap-6">
         <div className="w-[366px] space-y-2">
-          <div className=" bg-slate-100 border h-[180px] relative">
+          <div className=" bg-slate-300 border h-[180px] relative">
             <Image
               fill
               sizes="366px"
@@ -92,7 +92,7 @@ export default function WebToon({ name, color }: ICategory) {
               src={
                 Comics
                   ? `${Comics?.data.results[0].thumbnail.path}/landscape_medium.jpg`
-                  : ""
+                  : "/"
               }
             />
           </div>
